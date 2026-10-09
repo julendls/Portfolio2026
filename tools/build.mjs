@@ -74,6 +74,11 @@ const write = (rel, content) => {
 };
 
 // ---------- plantilla común ----------
+// Correo ofuscado: en el HTML solo hay base64; main.js lo monta. Sin JS se ve "usuario [at] dominio [dot] com".
+const b64 = (t) => Buffer.from(t, 'utf8').toString('base64');
+const mailLink = (cls) =>
+  `<a class="${cls}" data-m="${b64(site.email)}" href="#">${esc(site.email.replace('@', ' [at] ').replace(/\.(?=[^.]*$)/, ' [dot] '))}</a>`;
+
 function shell({ depth, path, title, description, image, body, bodyClass = '', current = '', jsonld = '', abs = false, cta = true }) {
   const base = abs ? '/' : '../'.repeat(depth);
   const home = abs ? '/' : base || './';
@@ -123,7 +128,7 @@ ${body}
 <footer class="site-footer">
 ${cta ? `  <p class="footer-lead">Like what you see?</p>
   <a class="footer-cta" href="${base}contact/">Got a story? Let's tell it.</a>
-` : ''}  <a class="footer-mail" href="mailto:${esc(site.email)}">${esc(site.email)}</a>
+` : ''}  ${mailLink("footer-mail")}
   <ul class="socials">
 ${visibleSocials.map((s) => `    <li><a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.label)}</a></li>`).join('\n')}
   </ul>
@@ -192,7 +197,6 @@ ${projects.map(tile).join('\n')}
     name: site.name,
     jobTitle: site.role,
     url: site.url,
-    email: site.email,
     address: { '@type': 'PostalAddress', addressLocality: site.location, addressCountry: 'ES' },
     sameAs: visibleSocials.map((s) => s.url),
   };
@@ -369,7 +373,7 @@ function contactPage() {
   <h1>What are we making?</h1>
   <p class="contact-sub">Write to me and I\'ll reply as soon as I can.</p>
   <div class="contact-grid">
-    <form id="contact-form" novalidate data-endpoint="${esc(site.contactEndpoint)}" data-email="${esc(site.email)}">
+    <form id="contact-form" novalidate data-endpoint="${esc(site.contactEndpoint)}" data-m="${b64(site.email)}">
       <label for="name">Name</label>
       <input id="name" name="name" type="text" autocomplete="name" required>
       <label for="email">Email</label>
@@ -381,7 +385,7 @@ function contactPage() {
     </form>
     <aside class="contact-side">
       <p>You can also write to me directly at</p>
-      <p><a class="text-link" href="mailto:${esc(site.email)}">${esc(site.email)}</a></p>
+      <p>${mailLink("text-link")}</p>
       <p class="contact-place">${esc(site.location)}, Basque Country</p>
     </aside>
   </div>

@@ -8,6 +8,21 @@
   const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const root = document.documentElement;
 
+  /* ---------- correo: se monta aquí para que los robots no lo lean del HTML ---------- */
+  const decode = (m) => {
+    try {
+      return atob(m);
+    } catch (_) {
+      return '';
+    }
+  };
+  $$('a[data-m]').forEach((a) => {
+    const mail = decode(a.dataset.m);
+    if (!mail) return;
+    a.href = 'mailto:' + mail;
+    a.textContent = mail;
+  });
+
   /* ---------- reloj de la cabecera ---------- */
   const clock = $('.clock time');
   if (clock) {
@@ -293,7 +308,7 @@
           form.reset();
           say('Message sent. I will reply as soon as I can.');
         } catch (_) {
-          say('The message could not be sent. Write to me at ' + form.dataset.email + '.', true);
+          say('The message could not be sent. Write to me at ' + decode(form.dataset.m) + '.', true);
         }
         return;
       }
@@ -302,7 +317,7 @@
       const subject = encodeURIComponent('Message from the website: ' + data.name);
       const body = encodeURIComponent(data.message + '\n\n' + data.name + '\n' + data.email);
       say('Opening your email app…');
-      location.href = 'mailto:' + form.dataset.email + '?subject=' + subject + '&body=' + body;
+      location.href = 'mailto:' + decode(form.dataset.m) + '?subject=' + subject + '&body=' + body;
     });
   }
 })();

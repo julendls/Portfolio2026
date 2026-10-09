@@ -8,6 +8,26 @@
   const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const root = document.documentElement;
 
+  /* ---------- respaldo del fundido entre páginas (donde no hay View Transitions) ---------- */
+  if (!reduceMotion && !('PageRevealEvent' in window)) {
+    root.classList.add('vt-fallback');
+    window.addEventListener('pageshow', (e) => {
+      if (e.persisted) root.classList.remove('is-leaving');
+    });
+    document.addEventListener('click', (e) => {
+      const a = e.target.closest && e.target.closest('a[href]');
+      if (!a || e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+      if (a.target && a.target !== '_self') return;
+      if (a.hasAttribute('download') || a.origin !== location.origin) return;
+      if (a.pathname === location.pathname && a.search === location.search) return; // mismo documento (anclas)
+      e.preventDefault();
+      root.classList.add('is-leaving');
+      setTimeout(() => {
+        location.href = a.href;
+      }, 240);
+    });
+  }
+
   /* ---------- correo: se monta aquí para que los robots no lo lean del HTML ---------- */
   const decode = (m) => {
     try {

@@ -1033,3 +1033,51 @@ html[data-view="list"] .cursor.is-on .cursor-label {
     width: 70px;
   }
 }
+
+/* ---------- transición entre páginas: se oscurece y aparece lo nuevo ---------- */
+@media (prefers-reduced-motion: no-preference) {
+  @view-transition {
+    navigation: auto;
+  }
+  .site-header {
+    view-transition-name: site-header;
+  }
+  ::view-transition {
+    background: var(--bg);
+  }
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    mix-blend-mode: normal;
+  }
+  ::view-transition-old(root) {
+    animation: vt-out 0.24s ease both;
+  }
+  ::view-transition-new(root) {
+    animation: vt-in 0.5s ease 0.14s both;
+  }
+  ::view-transition-old(site-header) {
+    display: none;
+  }
+  ::view-transition-new(site-header) {
+    animation: none;
+  }
+  @keyframes vt-out {
+    to {
+      opacity: 0;
+    }
+  }
+  @keyframes vt-in {
+    from {
+      opacity: 0;
+    }
+  }
+
+  /* Respaldo para navegadores sin View Transitions entre páginas (lo activa main.js) */
+  html.vt-fallback body {
+    animation: vt-in 0.5s ease both;
+  }
+  html.vt-fallback.is-leaving body {
+    opacity: 0;
+    transition: opacity 0.24s ease;
+  }
+}

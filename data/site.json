@@ -3,7 +3,7 @@
   "url": "https://julendls.com",
   "lang": "en",
   "title": "Julen De La Serna · Filmmaker and cinematographer in the Basque Country",
-  "description": "Portfolio of Julen De La Serna: music videos, documentaries and audiovisual pieces shot and produced from Vitoria-Gasteiz, Basque Country.",
+  "description": "Portfolio of Julen De La Serna: music videos, documentaries and other pieces shot and produced from Vitoria-Gasteiz, Basque Country.",
   "tagline": "Stories to be told.",
   "role": "Filmmaker and director of photography",
   "location": "Vitoria-Gasteiz",
@@ -49,9 +49,10 @@
     }
   ],
   "about": {
-    "lead": "My passion is creating audiovisual content that conveys experiences. Stories to be told.",
+    "lead": "My passion is creating content that conveys experiences. Stories to be told.",
     "body": [
-      "For me, every new project is a chance to create something different. This site reflects my passion and my experience: the personal projects I have been able to carry out in recent years, thanks to which I have grown and added my grain of sand to an audiovisual world that never stops changing."
+      "For the past 10 years I've worked in the industry, always inside agencies and production companies.",
+      "This site is something else. It's my personal project: a home for the work that's mine, and a truer reflection of what I make when the story is my own."
     ],
     "photo": "assets/img/brand/julen.jpg",
     "photoAlt": "Julen De La Serna holding a cinema camera"
@@ -59,7 +60,7 @@
   "services": [
     {
       "title": "Ready",
-      "text": "It all starts with a good story. Storytelling backed by broad experience in creating audiovisual experiences."
+      "text": "It all starts with a good story. Storytelling with broad experience behind it."
     },
     {
       "title": "Set",
@@ -67,7 +68,7 @@
     },
     {
       "title": "Action",
-      "text": "Own shooting gear and know-how from the latest brands in the audiovisual world: RED, Blackmagic, Sony, Freefly, DJI."
+      "text": "Own shooting gear and know-how from the latest brands in the industry: RED, Blackmagic, Sony, Freefly, DJI."
     }
   ],
   "clients": [

@@ -299,8 +299,9 @@
     });
     const nearest = rows.reduce((m, [, d]) => Math.min(m, d), Infinity);
     rows.forEach(([tile, d]) => {
-      const k = clamp01((d - nearest - vh * 0.04) / (vh * 0.34));
-      tile.style.setProperty('--d', (1 - k * 0.78).toFixed(3));
+      const k = clamp01((d - nearest - vh * 0.06) / (vh * 0.62));
+      const ease = k * k * (3 - 2 * k); // suavizado: sin saltos al empezar ni al terminar
+      tile.style.setProperty('--d', (1 - ease * 0.45).toFixed(3));
     });
   };
   const queueReveal = () => {

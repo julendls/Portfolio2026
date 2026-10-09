@@ -144,12 +144,12 @@ function homePage() {
   const body = `<main id="main">
   <section class="hero">
     <h1>${esc(site.tagline)}</h1>
-    <p class="hero-note">${esc(site.name)} is a ${esc(site.role.toLowerCase())} based in <span class="nb">${esc(site.location)}</span>.</p>
+    <p class="hero-note">${esc(site.roleShort)} based in <span class="nb">${esc(site.location)}</span>.</p>
   </section>
 
   <section id="work" class="work" aria-labelledby="work-title">
     <div class="work-bar">
-      <h2 id="work-title">Work <span class="count" aria-live="polite">${projects.length}</span></h2>
+      <h2 id="work-title">Work</h2>
       <div class="filters" role="group" aria-label="Filter by type">
         <button type="button" data-filter="all" aria-pressed="true">All</button>
 ${groups

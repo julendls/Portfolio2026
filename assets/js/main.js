@@ -144,7 +144,6 @@
   /* ---------- filtros y vista (cuadrícula / lista) ---------- */
   const grid = $('.grid');
   if (grid) {
-    const count = $('.count');
     const filterBtns = $$('[data-filter]');
     const viewBtns = $$('[data-view-btn]');
     const params = new URLSearchParams(location.search);
@@ -155,14 +154,12 @@
     };
 
     const applyFilter = (value) => {
-      let shown = 0;
       tiles.forEach((tile) => {
         const ok = value === 'all' || tile.dataset.group === value;
         tile.hidden = !ok;
-        if (ok) shown += 1;
       });
-      if (count) count.textContent = String(shown);
       filterBtns.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.filter === value)));
+      if (typeof queueReveal === 'function') queueReveal();
       if (value === 'all') params.delete('type');
       else params.set('type', value);
     };
@@ -192,6 +189,49 @@
     if (wanted && filterBtns.some((b) => b.dataset.filter === wanted)) applyFilter(wanted);
     applyView(params.get('view') === 'list' ? 'list' : 'grid');
   }
+
+
+  /* ---------- textos de cada trabajo: aparecen poco a poco al hacer scroll (móvil) ---------- */
+  const captions = $$('.tile .caption');
+  const touchLayout = matchMedia('(hover: none), (max-width: 680px)');
+  let revealOn = false;
+  let revealRaf = 0;
+  const clamp01 = (n) => Math.min(1, Math.max(0, n));
+
+  const paintReveal = () => {
+    revealRaf = 0;
+    const vh = window.innerHeight;
+    captions.forEach((cap) => {
+      const tile = cap.closest('.tile');
+      if (tile.hidden) return;
+      const top = cap.getBoundingClientRect().top;
+      const p = clamp01((vh * 0.94 - top) / (vh * 0.22));
+      cap.style.setProperty('--p', p.toFixed(3));
+      cap.style.setProperty('--q', clamp01((p - 0.3) / 0.7).toFixed(3));
+    });
+  };
+  const queueReveal = () => {
+    if (revealOn && !revealRaf) revealRaf = requestAnimationFrame(paintReveal);
+  };
+  const syncReveal = () => {
+    const want = !reduceMotion && touchLayout.matches && captions.length > 0;
+    if (want === revealOn) return;
+    revealOn = want;
+    root.classList.toggle('js-reveal', want);
+    if (want) paintReveal();
+    else
+      captions.forEach((cap) => {
+        cap.style.removeProperty('--p');
+        cap.style.removeProperty('--q');
+      });
+  };
+  window.addEventListener('scroll', queueReveal, { passive: true });
+  window.addEventListener('resize', () => {
+    syncReveal();
+    queueReveal();
+  });
+  if (touchLayout.addEventListener) touchLayout.addEventListener('change', syncReveal);
+  syncReveal();
 
   /* ---------- reproductor de la ficha de proyecto ---------- */
   $$('[data-embed]').forEach((box) => {

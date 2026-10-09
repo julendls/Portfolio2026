@@ -137,24 +137,50 @@
       } catch (_) {}
     };
 
+    tile._loop = { start, stop };
     video.addEventListener('playing', () => tile.classList.add('is-playing'));
     tile.addEventListener('pointerenter', (e) => e.pointerType === 'mouse' && start());
     tile.addEventListener('pointerleave', (e) => e.pointerType === 'mouse' && stop());
-    tile.addEventListener('focusin', start);
-    tile.addEventListener('focusout', stop);
-
-    // En pantallas táctiles no hay hover: se reproduce lo que está a la vista.
-    if (!finePointer && !reduceMotion && 'IntersectionObserver' in window) {
-      new IntersectionObserver(
-        (entries) =>
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) start();
-            else stop();
-          }),
-        { threshold: 0.6 }
-      ).observe(tile);
+    if (finePointer) {
+      tile.addEventListener('focusin', start);
+      tile.addEventListener('focusout', stop);
     }
   });
+
+  /* ---------- táctil: solo suena un vídeo, el que está más cerca del centro de la pantalla ---------- */
+  if (!finePointer && !reduceMotion) {
+    const players = tiles.filter((t) => $('video', t));
+    let current = null;
+    let raf = 0;
+    const api = new Map(); // tile -> {start, stop}
+    const pick = () => {
+      raf = 0;
+      const mid = window.innerHeight / 2;
+      let best = null;
+      let bestDist = Infinity;
+      players.forEach((t) => {
+        if (t.hidden) return;
+        const r = t.getBoundingClientRect();
+        if (r.bottom < 0 || r.top > window.innerHeight) return;
+        const d = Math.abs(r.top + r.height / 2 - mid);
+        if (d < bestDist) {
+          bestDist = d;
+          best = t;
+        }
+      });
+      if (best === current) return;
+      if (current) api.get(current).stop();
+      current = best;
+      if (current) api.get(current).start();
+    };
+    const queue = () => {
+      if (!raf) raf = requestAnimationFrame(pick);
+    };
+    players.forEach((t) => api.set(t, t._loop));
+    window.addEventListener('scroll', queue, { passive: true });
+    window.addEventListener('resize', queue);
+    pick();
+  }
 
   /* ---------- filtros y vista (cuadrícula / lista) ---------- */
   const grid = $('.grid');
@@ -175,6 +201,7 @@
       });
       filterBtns.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.filter === value)));
       if (typeof queueReveal === 'function') queueReveal();
+      window.dispatchEvent(new Event('scroll'));
       if (value === 'all') params.delete('type');
       else params.set('type', value);
     };

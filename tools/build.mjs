@@ -332,7 +332,7 @@ function aboutPage() {
   const body = `<main id="main" class="about">
   <h1 class="lead">${esc(a.lead)}</h1>
   <div class="about-body">
-    <img class="portrait" src="../${esc(a.photo)}" width="1690" height="1100" alt="${esc(a.photoAlt)}">
+    <img class="portrait" src="../${esc(a.photo)}" width="1200" height="1607" alt="${esc(a.photoAlt)}">
     <div class="about-text">
 ${a.body.map((t) => `      <p>${esc(t)}</p>`).join('\n')}
     </div>

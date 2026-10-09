@@ -90,6 +90,7 @@ function shell({ depth, path, title, description, image, body, bodyClass = '', c
 <link rel="icon" href="${base}assets/img/brand/favicon.png">
 <link rel="preload" href="${base}assets/fonts/instrument-serif-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="${base}assets/css/style.css?v=${V.css}">
+${bodyClass === 'page-home' ? `<script>try{var d=document.documentElement,s=sessionStorage;if(/[?&]intro\\b/.test(location.search)||!s.getItem('intro')){s.setItem('intro','1')}else{d.classList.add('no-intro')}}catch(e){}</script>` : ''}
 ${jsonld ? `<script type="application/ld+json">${jsonld}</script>` : ''}
 </head>
 <body id="top" class="${bodyClass}">

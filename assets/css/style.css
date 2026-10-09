@@ -824,3 +824,65 @@ html[data-view="list"] .cursor.is-on .cursor-label {
     transform: none;
   }
 }
+
+/* ---------- entrada en cascada de la portada (unos 3,7 s) ----------
+   Solo CSS: sin JavaScript todo se ve de inmediato al terminar. Se repite
+   una vez por sesión; con ?intro en la dirección se fuerza. */
+@keyframes intro-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes intro-rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.page-home .site-header {
+  animation: intro-fade 0.9s ease-out both;
+}
+.page-home .hero h1 {
+  animation: intro-rise 1.2s var(--ease) 0.8s both;
+}
+.page-home .hero-note {
+  animation: intro-rise 1s var(--ease) 1.5s both;
+}
+.page-home .work-bar {
+  animation: intro-rise 1s var(--ease) 2.1s both;
+}
+.page-home .tile:nth-child(1) {
+  animation: intro-rise 1s var(--ease) 2.6s both;
+}
+.page-home .tile:nth-child(2) {
+  animation: intro-rise 1s var(--ease) 2.75s both;
+}
+.page-home .tile:nth-child(3) {
+  animation: intro-rise 1s var(--ease) 2.9s both;
+}
+.page-home .tile:nth-child(4) {
+  animation: intro-rise 1s var(--ease) 3.05s both;
+}
+.no-intro .page-home .site-header,
+.no-intro .page-home .hero h1,
+.no-intro .page-home .hero-note,
+.no-intro .page-home .work-bar,
+.no-intro .page-home .tile {
+  animation: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .page-home .site-header,
+  .page-home .hero h1,
+  .page-home .hero-note,
+  .page-home .work-bar,
+  .page-home .tile {
+    animation: none;
+  }
+}

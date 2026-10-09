@@ -34,7 +34,7 @@ Los proyectos con `"published": false` quedan fuera del sitio (hay dos pendiente
 ### Vídeo en la miniatura
 
 Si existe `assets/loops/<slug>.mp4`, la miniatura lo reproduce al pasar el ratón (y en móvil, al verla en pantalla).
-Sin ese archivo, la miniatura muestra solo la imagen. Para crear uno desde el vídeo completo (necesita ffmpeg):
+Sin ese archivo, la miniatura muestra solo la imagen. Ahora mismo todos los bucles son el mismo vídeo de prueba: sustituye cada `assets/loops/<slug>.mp4` por el bueno (mismo nombre) y listo, no hace falta volver a generar nada. Para crear uno desde el vídeo completo (necesita ffmpeg):
 
 ```bash
 tools/make-loop.sh kolpe ~/Rodajes/kolpe.mov 42 6   # slug, vídeo, segundo de inicio, duración

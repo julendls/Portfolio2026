@@ -146,6 +146,7 @@ button {
 }
 .header-end {
   justify-self: end;
+  margin-left: 14px;
   display: flex;
   align-items: center;
   gap: 24px;
@@ -1026,5 +1027,9 @@ html[data-view="list"] .cursor.is-on .cursor-label {
   }
   .header-end {
     gap: 0;
+    margin-left: 6px;
+  }
+  .logo img {
+    width: 70px;
   }
 }

@@ -285,13 +285,6 @@ function homePage() {
   <section id="work" class="work" aria-labelledby="work-title">
     <div class="work-bar">
       <h2 id="work-title">${esc(t('work'))}</h2>
-      <div class="filters" role="group" aria-label="${esc(t('filterAria'))}">
-        <button type="button" data-filter="all" aria-pressed="true">${esc(t('all'))}</button>
-${groups
-  .filter((g) => projects.some((p) => p.group === g.id))
-  .map((g) => `        <button type="button" data-filter="${esc(g.id)}" aria-pressed="false">${esc(g.label)}</button>`)
-  .join('\n')}
-      </div>
       <div class="views" role="group" aria-label="${esc(t('viewAria'))}">
         <button type="button" data-view-btn="grid" aria-pressed="true">${esc(t('grid'))}</button>
         <button type="button" data-view-btn="list" aria-pressed="false">${esc(t('list'))}</button>

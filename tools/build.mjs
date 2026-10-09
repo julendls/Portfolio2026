@@ -62,9 +62,9 @@ function shell({ depth, path, title, description, image, body, bodyClass = '', c
   const canonical = `${site.url}/${path}`;
   const ogImage = `${site.url}/${image || site.about.photo}`;
   const nav = [
-    { id: 'trabajo', label: 'Trabajo', href: `${home === './' ? '' : home}#trabajo` },
-    { id: 'sobre-mi', label: 'Sobre mí', href: `${base}sobre-mi/` },
-    { id: 'contacto', label: 'Contacto', href: `${base}contacto/` },
+    { id: 'work', label: 'Work', href: `${home === './' ? '' : home}#work` },
+    { id: 'about', label: 'About', href: `${base}about/` },
+    { id: 'contact', label: 'Contact', href: `${base}contact/` },
   ];
   return `<!doctype html>
 <html lang="${site.lang}">
@@ -88,12 +88,12 @@ function shell({ depth, path, title, description, image, body, bodyClass = '', c
 ${jsonld ? `<script type="application/ld+json">${jsonld}</script>` : ''}
 </head>
 <body id="top" class="${bodyClass}">
-<a class="skip" href="#main">Saltar al contenido</a>
+<a class="skip" href="#main">Skip to content</a>
 <header class="site-header">
   <a class="logo" href="${home}">
     <img src="${base}assets/img/brand/logo-light@2x.png" width="132" height="59" alt="${esc(site.name)}, filmmaker">
   </a>
-  <nav class="nav" aria-label="Principal">
+  <nav class="nav" aria-label="Main">
 ${nav
   .map((n) => `    <a href="${n.href}"${current === n.id ? ' aria-current="page"' : ''}>${n.label}</a>`)
   .join('\n')}
@@ -102,13 +102,13 @@ ${nav
 </header>
 ${body}
 <footer class="site-footer">
-  <a class="footer-cta" href="${base}contacto/">Cuéntame tu proyecto</a>
+  <a class="footer-cta" href="${base}contact/">Tell me about your project</a>
   <a class="footer-mail" href="mailto:${esc(site.email)}">${esc(site.email)}</a>
   <ul class="socials">
 ${visibleSocials.map((s) => `    <li><a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.label)}</a></li>`).join('\n')}
   </ul>
   <p class="legal">© ${year} ${esc(site.name)}</p>
-  <a class="to-top" href="#top">Volver arriba</a>
+  <a class="to-top" href="#top">Back to top</a>
 </footer>
 <script src="${base}assets/js/main.js" defer></script>
 </body>
@@ -121,7 +121,7 @@ function tile(p, i) {
   const loop = hasLoop(p);
   const eager = i < 2;
   return `      <li class="tile" data-group="${esc(p.group)}" data-image="${esc(p.image)}">
-        <a href="trabajo/${esc(p.slug)}/" data-cursor>
+        <a href="work/${esc(p.slug)}/" data-cursor>
           <div class="frame">
             <img src="${esc(p.image)}" width="800" height="600" alt=""${eager ? '' : ' loading="lazy"'} decoding="async">${
     loop ? `\n            <video muted loop playsinline preload="none" tabindex="-1" aria-hidden="true" data-src="assets/loops/${esc(p.slug)}.mp4"></video>` : ''
@@ -143,22 +143,22 @@ function homePage() {
   const body = `<main id="main">
   <section class="hero">
     <h1>${esc(site.tagline)}</h1>
-    <p class="hero-note">${esc(site.name)} es ${esc(site.role.toLowerCase())} en <span class="nb">${esc(site.location)}</span>.</p>
+    <p class="hero-note">${esc(site.name)} is a ${esc(site.role.toLowerCase())} based in <span class="nb">${esc(site.location)}</span>.</p>
   </section>
 
-  <section id="trabajo" class="work" aria-labelledby="work-title">
+  <section id="work" class="work" aria-labelledby="work-title">
     <div class="work-bar">
-      <h2 id="work-title">Trabajo <span class="count" aria-live="polite">${projects.length}</span></h2>
-      <div class="filters" role="group" aria-label="Filtrar por tipo">
-        <button type="button" data-filter="all" aria-pressed="true">Todo</button>
+      <h2 id="work-title">Work <span class="count" aria-live="polite">${projects.length}</span></h2>
+      <div class="filters" role="group" aria-label="Filter by type">
+        <button type="button" data-filter="all" aria-pressed="true">All</button>
 ${groups
   .filter((g) => projects.some((p) => p.group === g.id))
   .map((g) => `        <button type="button" data-filter="${esc(g.id)}" aria-pressed="false">${esc(g.label)}</button>`)
   .join('\n')}
       </div>
-      <div class="views" role="group" aria-label="Vista">
-        <button type="button" data-view-btn="grid" aria-pressed="true">Cuadrícula</button>
-        <button type="button" data-view-btn="list" aria-pressed="false">Lista</button>
+      <div class="views" role="group" aria-label="View">
+        <button type="button" data-view-btn="grid" aria-pressed="true">Grid</button>
+        <button type="button" data-view-btn="list" aria-pressed="false">List</button>
       </div>
     </div>
     <ul class="grid">
@@ -183,7 +183,7 @@ ${projects.map(tile).join('\n')}
     description: site.description,
     body,
     bodyClass: 'page-home',
-    current: 'trabajo',
+    current: 'work',
     jsonld: JSON.stringify(person),
   });
 }
@@ -195,45 +195,45 @@ function projectPage(p, i) {
   const plat = PLATFORMS[p.platform] || { label: 'Web', embed: null };
   const embedUrl = plat.embed && p.videoId ? plat.embed(p.videoId) : '';
   const facts = [
-    p.artist && [p.group === 'videoclip' ? 'Artista' : 'Con', p.artist],
-    p.category && ['Tipo', p.category],
-    p.role && ['Participación', p.role],
-    ['Dónde verlo', plat.label],
+    p.artist && [p.group === 'videoclip' ? 'Artist' : 'With', p.artist],
+    p.category && ['Type', p.category],
+    p.role && ['Role', p.role],
+    ['Watch on', plat.label],
   ].filter(Boolean);
 
   const player = embedUrl
     ? `<div class="player" data-cursor data-embed="${esc(embedUrl)}" data-title="${esc(p.title)}">
-      <img src="../../${esc(p.image)}" width="800" height="600" alt="Fotograma de ${esc(p.title)}">
-      <button type="button" class="player-btn" aria-label="Reproducir ${esc(p.title)}"></button>
+      <img src="../../${esc(p.image)}" width="800" height="600" alt="Still from ${esc(p.title)}">
+      <button type="button" class="player-btn" aria-label="Play ${esc(p.title)}"></button>
     </div>`
     : `<a class="player" data-cursor href="${esc(p.url)}" target="_blank" rel="noopener">
-      <img src="../../${esc(p.image)}" width="800" height="600" alt="Fotograma de ${esc(p.title)}">
-      <span class="player-label">Ver en ${esc(plat.label)}</span>
+      <img src="../../${esc(p.image)}" width="800" height="600" alt="Still from ${esc(p.title)}">
+      <span class="player-label">Watch on ${esc(plat.label)}</span>
     </a>`;
 
   const body = `<main id="main" class="project">
-  <a class="back" href="../../#trabajo">Volver al trabajo</a>
+  <a class="back" href="../../#work">Back to work</a>
   <h1>${esc(p.title)}</h1>
   <dl class="facts">
 ${facts.map(([k, v]) => `    <div><dt>${esc(k)}</dt><dd>${esc(v)}</dd></div>`).join('\n')}
   </dl>
   ${player}
-  <p class="external"><a href="${esc(p.url)}" target="_blank" rel="noopener">Abrir en ${esc(plat.label)}</a></p>
-  <nav class="pager" aria-label="Más proyectos">
-    <a class="prev" href="../${esc(prev.slug)}/"><span>Anterior</span><strong>${esc(prev.title)}</strong></a>
-    <a class="next" href="../${esc(next.slug)}/"><span>Siguiente</span><strong>${esc(next.title)}</strong></a>
+  <p class="external"><a href="${esc(p.url)}" target="_blank" rel="noopener">Open on ${esc(plat.label)}</a></p>
+  <nav class="pager" aria-label="More projects">
+    <a class="prev" href="../${esc(prev.slug)}/"><span>Previous</span><strong>${esc(prev.title)}</strong></a>
+    <a class="next" href="../${esc(next.slug)}/"><span>Next</span><strong>${esc(next.title)}</strong></a>
   </nav>
 </main>`;
   const who = p.artist ? `${p.title}, ${p.artist}` : p.title;
   return shell({
     depth: 2,
-    path: `trabajo/${p.slug}/`,
+    path: `work/${p.slug}/`,
     title: `${who} · ${site.name}`,
-    description: `${p.category || 'Proyecto'}${p.artist ? ` con ${p.artist}` : ''}. ${p.role ? p.role + '. ' : ''}Trabajo de ${site.name}.`,
+    description: `${p.category || 'Project'}${p.artist ? ` with ${p.artist}` : ''}. ${p.role ? p.role + '. ' : ''}Work by ${site.name}.`,
     image: p.image,
     body,
     bodyClass: 'page-project',
-    current: 'trabajo',
+    current: 'work',
   });
 }
 
@@ -246,17 +246,17 @@ function aboutPage() {
     <img class="portrait" src="../${esc(a.photo)}" width="1690" height="1100" alt="${esc(a.photoAlt)}">
     <div class="about-text">
 ${a.body.map((t) => `      <p>${esc(t)}</p>`).join('\n')}
-      <p><a class="text-link" href="../contacto/">Hablemos de tu proyecto</a></p>
+      <p><a class="text-link" href="../contact/">Let's talk about your project</a></p>
     </div>
   </div>
   <section class="services" aria-labelledby="services-title">
-    <h2 id="services-title">Cómo trabajo</h2>
+    <h2 id="services-title">How I work</h2>
     <div class="services-grid">
 ${site.services.map((s) => `      <article><h3>${esc(s.title)}</h3><p>${esc(s.text)}</p></article>`).join('\n')}
     </div>
   </section>
   <section class="clients" aria-labelledby="clients-title">
-    <h2 id="clients-title">Empresas con las que he trabajado</h2>
+    <h2 id="clients-title">Companies I have worked with</h2>
     <ul>
 ${visibleClients
   .map(
@@ -269,62 +269,62 @@ ${visibleClients
 </main>`;
   return shell({
     depth: 1,
-    path: 'sobre-mi/',
-    title: `Sobre mí · ${site.name}`,
-    description: `${a.lead} ${site.name}, ${site.role.toLowerCase()} en ${site.location}.`,
+    path: 'about/',
+    title: `About · ${site.name}`,
+    description: `${a.lead} ${site.name}, ${site.role.toLowerCase()} based in ${site.location}.`,
     image: a.photo,
     body,
     bodyClass: 'page-about',
-    current: 'sobre-mi',
+    current: 'about',
   });
 }
 
 // ---------- contacto ----------
 function contactPage() {
   const body = `<main id="main" class="contact">
-  <h1>Cuéntame tu proyecto.</h1>
-  <p class="contact-sub">Escríbeme y te respondo en cuanto pueda.</p>
+  <h1>Tell me about your project.</h1>
+  <p class="contact-sub">Write to me and I will reply as soon as I can.</p>
   <div class="contact-grid">
     <form id="contact-form" novalidate data-endpoint="${esc(site.contactEndpoint)}" data-email="${esc(site.email)}">
-      <label for="name">Nombre</label>
+      <label for="name">Name</label>
       <input id="name" name="name" type="text" autocomplete="name" required>
       <label for="email">Email</label>
       <input id="email" name="email" type="email" autocomplete="email" required>
-      <label for="message">Mensaje</label>
+      <label for="message">Message</label>
       <textarea id="message" name="message" rows="7" required></textarea>
-      <button type="submit">Enviar mensaje</button>
+      <button type="submit">Send message</button>
       <p class="form-status" role="status" aria-live="polite"></p>
     </form>
     <aside class="contact-side">
-      <p>También puedes escribirme directamente a</p>
+      <p>You can also write to me directly at</p>
       <p><a class="text-link" href="mailto:${esc(site.email)}">${esc(site.email)}</a></p>
-      <p class="contact-place">${esc(site.location)}, País Vasco</p>
+      <p class="contact-place">${esc(site.location)}, Basque Country</p>
     </aside>
   </div>
 </main>`;
   return shell({
     depth: 1,
-    path: 'contacto/',
-    title: `Contacto · ${site.name}`,
-    description: `Cuéntame tu proyecto. ${site.name}, ${site.role.toLowerCase()} en ${site.location}.`,
+    path: 'contact/',
+    title: `Contact · ${site.name}`,
+    description: `Tell me about your project. ${site.name}, ${site.role.toLowerCase()} based in ${site.location}.`,
     body,
     bodyClass: 'page-contact',
-    current: 'contacto',
+    current: 'contact',
   });
 }
 
 // ---------- 404 ----------
 function notFoundPage() {
   const body = `<main id="main" class="notfound">
-  <h1>Esta página no existe.</h1>
-  <p><a class="text-link" href="/">Volver al trabajo</a></p>
+  <h1>This page does not exist.</h1>
+  <p><a class="text-link" href="/">Back to work</a></p>
 </main>`;
   return shell({
     depth: 0,
     abs: true,
     path: '404.html',
-    title: `Página no encontrada · ${site.name}`,
-    description: 'Esta página no existe.',
+    title: `Page not found · ${site.name}`,
+    description: 'This page does not exist.',
     body,
     bodyClass: 'page-404',
   });
@@ -332,12 +332,12 @@ function notFoundPage() {
 
 // ---------- escribir ----------
 write('index.html', homePage());
-projects.forEach((p, i) => write(`trabajo/${p.slug}/index.html`, projectPage(p, i)));
-write('sobre-mi/index.html', aboutPage());
-write('contacto/index.html', contactPage());
+projects.forEach((p, i) => write(`work/${p.slug}/index.html`, projectPage(p, i)));
+write('about/index.html', aboutPage());
+write('contact/index.html', contactPage());
 write('404.html', notFoundPage());
 
-const urls = ['', 'sobre-mi/', 'contacto/', ...projects.map((p) => `trabajo/${p.slug}/`)];
+const urls = ['', 'about/', 'contact/', ...projects.map((p) => `work/${p.slug}/`)];
 write(
   'sitemap.xml',
   `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls

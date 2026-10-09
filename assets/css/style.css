@@ -160,10 +160,10 @@ button {
   grid-template-columns: minmax(0, 1fr) minmax(0, 18rem);
   align-items: end;
   gap: 24px var(--pad);
-  padding: clamp(56px, 11vw, 168px) var(--pad) clamp(40px, 6vw, 88px);
+  padding: clamp(48px, 7vw, 104px) var(--pad) clamp(36px, 5vw, 72px);
 }
 .hero h1 {
-  font: 400 clamp(52px, 10.5vw, 168px) / 0.92 var(--serif);
+  font: 400 clamp(40px, 6.2vw, 96px) / 0.98 var(--serif);
   letter-spacing: -0.03em;
   text-wrap: balance;
 }
@@ -338,28 +338,22 @@ html[data-view="list"] .artist:empty {
   pointer-events: none;
   will-change: transform;
 }
-.cursor-disc {
-  display: grid;
-  place-items: center;
-  width: 92px;
-  height: 92px;
-  margin: -46px 0 0 -46px;
-  border-radius: 50%;
-  background: var(--fg);
-  color: var(--bg);
-  transform: scale(0);
-  transition: transform 0.3s var(--ease);
+.cursor-label {
+  display: block;
+  padding: 9px 14px 8px;
+  background: #d6d5d1;
+  color: #0a0a0a;
+  font: 600 13px / 1 var(--sans);
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+  transform: translate(-50%, -50%) scale(0);
+  transition: transform 0.25s var(--ease);
 }
-.cursor-disc svg {
-  width: 26px;
-  height: 26px;
-  margin-left: 4px;
+.cursor.is-on .cursor-label {
+  transform: translate(-50%, -50%) scale(1);
 }
-.cursor.is-on .cursor-disc {
-  transform: scale(1);
-}
-html[data-view="list"] .cursor.is-on .cursor-disc {
-  transform: scale(0);
+html[data-view="list"] .cursor.is-on .cursor-label {
+  transform: translate(-50%, -50%) scale(0);
 }
 .peek {
   width: 300px;
@@ -459,15 +453,16 @@ html[data-view="list"] .cursor.is-on .cursor-disc {
 }
 @media (hover: none), (pointer: coarse) {
   .player-btn::after {
-    content: "";
+    content: "[PLAY]";
     position: absolute;
     left: 50%;
     top: 50%;
-    width: 72px;
-    height: 72px;
-    margin: -36px 0 0 -36px;
-    border-radius: 50%;
-    background: var(--fg) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23050505' d='M9 5v14l11-7z'/%3E%3C/svg%3E") center / 28px no-repeat;
+    padding: 10px 16px 9px;
+    background: #d6d5d1;
+    color: #0a0a0a;
+    font: 600 14px / 1 var(--sans);
+    letter-spacing: 0.08em;
+    transform: translate(-50%, -50%);
   }
 }
 .external {

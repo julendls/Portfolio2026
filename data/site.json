@@ -1,52 +1,117 @@
 {
   "name": "Julen De La Serna",
   "url": "https://julendls.com",
-  "lang": "es",
-  "title": "Julen De La Serna · Filmmaker y director de fotografía en el País Vasco",
-  "description": "Portfolio de Julen De La Serna: videoclips, documentales y piezas audiovisuales rodadas y producidas desde Vitoria-Gasteiz.",
-  "tagline": "Historias para ser contadas.",
-  "role": "Filmmaker y director de fotografía",
+  "lang": "en",
+  "title": "Julen De La Serna · Filmmaker and cinematographer in the Basque Country",
+  "description": "Portfolio of Julen De La Serna: music videos, documentaries and audiovisual pieces shot and produced from Vitoria-Gasteiz, Basque Country.",
+  "tagline": "Stories to be told.",
+  "role": "Filmmaker and director of photography",
   "location": "Vitoria-Gasteiz",
   "timezone": "Europe/Madrid",
   "email": "julendelaserna@gmail.com",
   "contactEndpoint": "",
   "socials": [
-    { "id": "instagram", "label": "Instagram", "url": "https://instagram.com/julendls", "show": true },
-    { "id": "vimeo", "label": "Vimeo", "url": "https://vimeo.com/julendls", "show": true },
-    { "id": "youtube", "label": "YouTube", "url": "https://youtube.com/julendls", "show": true },
-    { "id": "linkedin", "label": "LinkedIn", "url": "https://www.linkedin.com/pub/julen-de-la-serna/86/40a/118", "show": true },
-    { "id": "facebook", "label": "Facebook", "url": "https://fb.com/julendelaserna", "show": false },
-    { "id": "twitter", "label": "X", "url": "https://twitter.com/julendls", "show": false }
+    {
+      "id": "instagram",
+      "label": "Instagram",
+      "url": "https://instagram.com/julendls",
+      "show": true
+    },
+    {
+      "id": "vimeo",
+      "label": "Vimeo",
+      "url": "https://vimeo.com/julendls",
+      "show": true
+    },
+    {
+      "id": "youtube",
+      "label": "YouTube",
+      "url": "https://youtube.com/julendls",
+      "show": true
+    },
+    {
+      "id": "linkedin",
+      "label": "LinkedIn",
+      "url": "https://www.linkedin.com/pub/julen-de-la-serna/86/40a/118",
+      "show": true
+    },
+    {
+      "id": "facebook",
+      "label": "Facebook",
+      "url": "https://fb.com/julendelaserna",
+      "show": false
+    },
+    {
+      "id": "twitter",
+      "label": "X",
+      "url": "https://twitter.com/julendls",
+      "show": false
+    }
   ],
   "about": {
-    "lead": "Mi pasión es crear contenidos audiovisuales capaces de transmitir experiencias. Historias para ser contadas.",
+    "lead": "My passion is creating audiovisual content that conveys experiences. Stories to be told.",
     "body": [
-      "Para mí, cada nuevo proyecto es una oportunidad de crear algo diferente. Esta página es un reflejo de mi pasión y de mi experiencia, de los proyectos personales que he podido llevar a cabo durante estos últimos años, gracias a los cuales he podido evolucionar y aportar mi granito de arena a un mundo audiovisual que no para de cambiar."
+      "For me, every new project is a chance to create something different. This site reflects my passion and my experience: the personal projects I have been able to carry out in recent years, thanks to which I have grown and added my grain of sand to an audiovisual world that never stops changing."
     ],
     "photo": "assets/img/brand/julen.jpg",
-    "photoAlt": "Julen De La Serna rodando con una cámara de cine al hombro"
+    "photoAlt": "Julen De La Serna holding a cinema camera"
   },
   "services": [
     {
-      "title": "Preparados",
-      "text": "Todo comienza con una buena historia. Storytelling con amplia experiencia en la creación de experiencias audiovisuales."
+      "title": "Ready",
+      "text": "It all starts with a good story. Storytelling backed by broad experience in creating audiovisual experiences."
     },
     {
-      "title": "Listos",
-      "text": "Motion graphics, animación 2D-3D, composición. Flujos de trabajo con After Effects, DaVinci Resolve, Final Cut Pro y Cinema 4D."
+      "title": "Set",
+      "text": "Motion graphics, 2D-3D animation and compositing. Workflows in After Effects, DaVinci Resolve, Final Cut Pro and Cinema 4D."
     },
     {
-      "title": "Acción",
-      "text": "Conocimientos y equipo propio de grabación con las últimas marcas del mundo audiovisual: RED, Blackmagic, Sony, Freefly, DJI."
+      "title": "Action",
+      "text": "Own shooting gear and know-how from the latest brands in the audiovisual world: RED, Blackmagic, Sony, Freefly, DJI."
     }
   ],
   "clients": [
-    { "name": "Aktual Films", "logo": "assets/img/clients/aktual.png", "url": "https://arteman.eus", "show": true },
-    { "name": "Kubik", "logo": "assets/img/clients/kubik.png", "url": "https://kubikvitoria.com", "show": true },
-    { "name": "Debolex", "logo": "assets/img/clients/debolex.png", "url": "https://debolex.com", "show": true },
-    { "name": "Atresmedia", "logo": "assets/img/clients/atresmedia.png", "url": "https://atresmedia.com", "show": true },
-    { "name": "Plano a Plano", "logo": "assets/img/clients/planoapla.png", "url": "https://planoaplano.es", "show": true },
-    { "name": "Haizeacam", "logo": "assets/img/clients/haizeacam.png", "url": "https://haizeacam.com", "show": true },
-    { "name": "Dissolve", "logo": "assets/img/clients/dissolve.png", "url": "", "show": false }
+    {
+      "name": "Aktual Films",
+      "logo": "assets/img/clients/aktual.png",
+      "url": "https://arteman.eus",
+      "show": true
+    },
+    {
+      "name": "Kubik",
+      "logo": "assets/img/clients/kubik.png",
+      "url": "https://kubikvitoria.com",
+      "show": true
+    },
+    {
+      "name": "Debolex",
+      "logo": "assets/img/clients/debolex.png",
+      "url": "https://debolex.com",
+      "show": true
+    },
+    {
+      "name": "Atresmedia",
+      "logo": "assets/img/clients/atresmedia.png",
+      "url": "https://atresmedia.com",
+      "show": true
+    },
+    {
+      "name": "Plano a Plano",
+      "logo": "assets/img/clients/planoapla.png",
+      "url": "https://planoaplano.es",
+      "show": true
+    },
+    {
+      "name": "Haizeacam",
+      "logo": "assets/img/clients/haizeacam.png",
+      "url": "https://haizeacam.com",
+      "show": true
+    },
+    {
+      "name": "Dissolve",
+      "logo": "assets/img/clients/dissolve.png",
+      "url": "",
+      "show": false
+    }
   ]
 }

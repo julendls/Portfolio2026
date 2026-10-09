@@ -11,7 +11,7 @@
   /* ---------- reloj de la cabecera ---------- */
   const clock = $('.clock time');
   if (clock) {
-    const fmt = new Intl.DateTimeFormat('es-ES', {
+    const fmt = new Intl.DateTimeFormat('en-GB', {
       hour: '2-digit',
       minute: '2-digit',
       timeZone: clock.dataset.tz || 'Europe/Madrid',
@@ -33,8 +33,7 @@
     const cursor = document.createElement('div');
     cursor.className = 'cursor';
     cursor.setAttribute('aria-hidden', 'true');
-    cursor.innerHTML =
-      '<div class="cursor-disc"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 3.5v17a1 1 0 0 0 1.5.86l14-8.5a1 1 0 0 0 0-1.72l-14-8.5A1 1 0 0 0 6 3.5z"/></svg></div>';
+    cursor.innerHTML = '<span class="cursor-label">[PLAY]</span>';
 
     const peek = document.createElement('div');
     peek.className = 'peek';
@@ -164,15 +163,15 @@
       });
       if (count) count.textContent = String(shown);
       filterBtns.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.filter === value)));
-      if (value === 'all') params.delete('tipo');
-      else params.set('tipo', value);
+      if (value === 'all') params.delete('type');
+      else params.set('type', value);
     };
 
     const applyView = (value) => {
       root.dataset.view = value;
       viewBtns.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.viewBtn === value)));
-      if (value === 'grid') params.delete('vista');
-      else params.set('vista', 'lista');
+      if (value === 'grid') params.delete('view');
+      else params.set('view', 'list');
       cursorOff();
     };
 
@@ -189,9 +188,9 @@
       })
     );
 
-    const wanted = params.get('tipo');
+    const wanted = params.get('type');
     if (wanted && filterBtns.some((b) => b.dataset.filter === wanted)) applyFilter(wanted);
-    applyView(params.get('vista') === 'lista' ? 'list' : 'grid');
+    applyView(params.get('view') === 'list' ? 'list' : 'grid');
   }
 
   /* ---------- reproductor de la ficha de proyecto ---------- */
@@ -203,7 +202,7 @@
       () => {
         const frame = document.createElement('iframe');
         frame.src = box.dataset.embed;
-        frame.title = box.dataset.title || 'Vídeo';
+        frame.title = box.dataset.title || 'Video';
         frame.allow = 'autoplay; fullscreen; picture-in-picture; encrypted-media';
         frame.allowFullscreen = true;
         box.replaceChildren(frame);
@@ -236,14 +235,14 @@
         if (bad && !firstBad) firstBad = el;
       });
       if (firstBad) {
-        say('Revisa los campos marcados: faltan datos o el email no es válido.', true);
+        say('Please check the highlighted fields: something is missing or the email is not valid.', true);
         firstBad.focus();
         return;
       }
 
       const endpoint = form.dataset.endpoint;
       if (endpoint) {
-        say('Enviando…');
+        say('Sending…');
         try {
           const res = await fetch(endpoint, {
             method: 'POST',
@@ -252,17 +251,17 @@
           });
           if (!res.ok) throw new Error(String(res.status));
           form.reset();
-          say('Mensaje enviado. Te respondo en cuanto pueda.');
+          say('Message sent. I will reply as soon as I can.');
         } catch (_) {
-          say('No se ha podido enviar. Escríbeme a ' + form.dataset.email + '.', true);
+          say('The message could not be sent. Write to me at ' + form.dataset.email + '.', true);
         }
         return;
       }
 
       // Sin servicio de formularios configurado: se abre el correo del visitante.
-      const subject = encodeURIComponent('Contacto desde la web: ' + data.name);
+      const subject = encodeURIComponent('Message from the website: ' + data.name);
       const body = encodeURIComponent(data.message + '\n\n' + data.name + '\n' + data.email);
-      say('Abriendo tu programa de correo…');
+      say('Opening your email app…');
       location.href = 'mailto:' + form.dataset.email + '?subject=' + subject + '&body=' + body;
     });
   }

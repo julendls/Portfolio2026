@@ -14,7 +14,7 @@ Rediseño de la web de 2021 con cuadrícula de trabajo, vídeos en bucle dentro 
 | Diseño y comportamiento | `assets/css/style.css`, `assets/js/main.js` |
 | Generador de páginas | `tools/build.mjs` |
 
-Las páginas (`index.html`, `trabajo/*`, `sobre-mi/`, `contacto/`) se generan: no se editan a mano.
+Las páginas (`index.html`, `work/*`, `about/`, `contact/`) se generan: no se editan a mano.
 
 ## Flujo de trabajo
 

@@ -278,7 +278,7 @@ function tile(p, i) {
 function homePage() {
   const body = `<main id="main">
   <section class="hero">
-    <h1><span class="tilt-sharp">${esc(site.tagline)}</span></h1>
+    <h1 data-text="${esc(site.tagline)}"><span class="h1-sharp">${esc(site.tagline)}</span></h1>
     <p class="hero-note">${t('heroNote', { role: esc(site.roleShort), loc: esc(site.location) })}</p>
   </section>
 

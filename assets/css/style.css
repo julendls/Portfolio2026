@@ -917,7 +917,9 @@ html[data-view="list"] .cursor.is-on .cursor-label {
 .page-home .site-header {
   animation: intro-fade 0.9s ease-in-out both;
 }
-.page-home .hero h1,
+.page-home .hero h1 {
+  animation: intro-soft 0.9s ease-out 0.55s both;
+}
 .page-home .hero-note {
   animation: intro-soft 1.5s ease-in-out 0.55s both;
 }
@@ -950,6 +952,51 @@ html[data-view="list"] .cursor.is-on .cursor-label {
   .page-home .work-bar,
   .page-home .tile {
     animation: none;
+  }
+}
+
+/* Titular: se "dibuja" de izquierda a derecha, de borroso a nítido (~1,3 s).
+   Dos capas: la nítida aparece barriendo hacia la derecha y detrás queda una copia desenfocada que se va. */
+@media (prefers-reduced-motion: no-preference) {
+  html:not(.no-intro) .page-home .hero h1 {
+    position: relative;
+    width: fit-content;
+    max-width: 100%;
+  }
+  html:not(.no-intro) .page-home .h1-sharp {
+    display: block;
+    -webkit-mask-image: linear-gradient(90deg, #000 0%, #000 33.3%, transparent 66.6%, transparent 100%);
+    mask-image: linear-gradient(90deg, #000 0%, #000 33.3%, transparent 66.6%, transparent 100%);
+    -webkit-mask-size: 300% 100%;
+    mask-size: 300% 100%;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    animation: h1-sweep 1.3s cubic-bezier(0.45, 0, 0.25, 1) 0.55s both;
+  }
+  html:not(.no-intro) .page-home .hero h1::after {
+    content: attr(data-text) / "";
+    position: absolute;
+    inset: -0.12em -0.3em;
+    padding: 0.12em 0.3em;
+    pointer-events: none;
+    filter: blur(7px);
+    -webkit-mask-image: linear-gradient(90deg, transparent 0%, transparent 33.3%, #000 66.6%, #000 100%);
+    mask-image: linear-gradient(90deg, transparent 0%, transparent 33.3%, #000 66.6%, #000 100%);
+    -webkit-mask-size: 300% 100%;
+    mask-size: 300% 100%;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    animation: h1-sweep 1.3s cubic-bezier(0.45, 0, 0.25, 1) 0.55s both;
+  }
+}
+@keyframes h1-sweep {
+  from {
+    -webkit-mask-position: 100% 0;
+    mask-position: 100% 0;
+  }
+  to {
+    -webkit-mask-position: 0% 0;
+    mask-position: 0% 0;
   }
 }
 
@@ -1080,27 +1127,4 @@ html[data-view="list"] .cursor.is-on .cursor-label {
     opacity: 0;
     transition: opacity 0.24s ease;
   }
-}
-
-/* ---------- móvil: el titular se desenfoca por los bordes al inclinar el teléfono ---------- */
-.has-tilt .hero h1 {
-  position: relative;
-  width: fit-content;
-  max-width: 100%;
-  --t: 0;
-}
-.has-tilt .tilt-sharp {
-  display: block;
-  -webkit-mask-image: linear-gradient(90deg, rgba(0, 0, 0, calc(1 - var(--t))) 0%, #000 34%, #000 66%, rgba(0, 0, 0, calc(1 - var(--t))) 100%);
-  mask-image: linear-gradient(90deg, rgba(0, 0, 0, calc(1 - var(--t))) 0%, #000 34%, #000 66%, rgba(0, 0, 0, calc(1 - var(--t))) 100%);
-}
-.has-tilt .hero h1::after {
-  content: attr(data-text) / "";
-  position: absolute;
-  inset: -0.12em -0.3em;
-  padding: 0.12em 0.3em;
-  pointer-events: none;
-  filter: blur(calc(var(--t) * 5px));
-  -webkit-mask-image: linear-gradient(90deg, rgba(0, 0, 0, var(--t)) 0%, transparent 34%, transparent 66%, rgba(0, 0, 0, var(--t)) 100%);
-  mask-image: linear-gradient(90deg, rgba(0, 0, 0, var(--t)) 0%, transparent 34%, transparent 66%, rgba(0, 0, 0, var(--t)) 100%);
 }

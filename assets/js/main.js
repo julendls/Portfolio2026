@@ -61,48 +61,6 @@
     });
   }
 
-  /* ---------- móvil: el titular se desenfoca por los bordes al inclinar el teléfono ---------- */
-  const tiltTitle = $('.hero h1');
-  if (tiltTitle && !finePointer && !reduceMotion && 'DeviceOrientationEvent' in window) {
-    const FLAT = 6; // grados de inclinación que se toleran sin desenfoque
-    const FULL = 32; // inclinación a la que el desenfoque es máximo
-    let target = 0;
-    let cur = 0;
-    let tRaf = 0;
-    const paint = () => {
-      cur += (target - cur) * 0.12;
-      if (Math.abs(target - cur) < 0.002) cur = target;
-      tiltTitle.style.setProperty('--t', cur.toFixed(3));
-      tRaf = cur === target ? 0 : requestAnimationFrame(paint);
-    };
-    const onTilt = (e) => {
-      if (e.gamma == null) return;
-      if (window.screen && screen.orientation && screen.orientation.angle % 180 !== 0) return; // solo en vertical
-      target = clamp01((Math.abs(e.gamma) - FLAT) / (FULL - FLAT));
-      if (!tRaf) tRaf = requestAnimationFrame(paint);
-    };
-    const begin = () => {
-      tiltTitle.dataset.text = tiltTitle.textContent.trim();
-      root.classList.add('has-tilt');
-      window.addEventListener('deviceorientation', onTilt, { passive: true });
-    };
-    if (typeof DeviceOrientationEvent.requestPermission === 'function') {
-      // iPhone: el permiso solo se puede pedir tras un toque del usuario.
-      let asked = false;
-      const ask = () => {
-        if (asked) return;
-        asked = true;
-        DeviceOrientationEvent.requestPermission()
-          .then((r) => r === 'granted' && begin())
-          .catch(() => {});
-      };
-      document.addEventListener('click', ask, { once: true });
-      document.addEventListener('touchend', ask, { once: true });
-    } else {
-      begin();
-    }
-  }
-
   /* ---------- reloj de la cabecera ---------- */
   const clock = $('.clock time');
   if (clock) {

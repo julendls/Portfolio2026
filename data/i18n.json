@@ -1,9 +1,27 @@
 {
-  "_comment": "Textos de la web por idioma. 'en' es el idioma por defecto (raíz del sitio); 'es' vive en /es/ y 'eu' en /eu/. 'site' sobrescribe campos de site.json; 'category', 'role' y 'groups' traducen los valores de projects.json; 'projects' trae textos propios por slug. Las traducciones al euskera conviene que las revise una persona nativa.",
+  "_comment": "Textos de la web por idioma. 'en' es el idioma por defecto (raíz del sitio); 'es' vive en /es/ y 'eu' en /eu/. 'site' sobrescribe campos de site.json; 'category', 'role' y 'groups' traducen los valores de projects.json; 'projects' trae textos propios por slug. Las traducciones al euskera conviene que las revise una persona nativa. 'Stories to be told.' se mantiene siempre en inglés (es el copy de marca): por eso no hay 'tagline' en es/eu.",
   "langs": [
-    { "code": "en", "prefix": "", "label": "EN", "name": "English", "locale": "en_US" },
-    { "code": "es", "prefix": "es/", "label": "ES", "name": "Castellano", "locale": "es_ES" },
-    { "code": "eu", "prefix": "eu/", "label": "EUS", "name": "Euskara", "locale": "eu_ES" }
+    {
+      "code": "en",
+      "prefix": "",
+      "label": "EN",
+      "name": "English",
+      "locale": "en_US"
+    },
+    {
+      "code": "es",
+      "prefix": "es/",
+      "label": "ES",
+      "name": "Castellano",
+      "locale": "es_ES"
+    },
+    {
+      "code": "eu",
+      "prefix": "eu/",
+      "label": "EUS",
+      "name": "Euskara",
+      "locale": "eu_ES"
+    }
   ],
   "en": {
     "ui": {
@@ -142,11 +160,10 @@
     "site": {
       "title": "Filmmaker en Vitoria-Gasteiz, País Vasco · Julen De La Serna",
       "description": "Julen De La Serna es filmmaker y director de fotografía en Vitoria-Gasteiz. Videoclips, documentales y contenido de marca en todo el País Vasco.",
-      "tagline": "Historias por contar.",
       "role": "Filmmaker y director de fotografía",
       "roleShort": "Filmmaker y DOP",
       "about": {
-        "lead": "Mi pasión es crear contenido que transmite experiencias. Historias por contar.",
+        "lead": "Mi pasión es crear contenido que transmite experiencias. Stories to be told.",
         "body": [
           "Llevo 10 años en la industria, siempre dentro de agencias y productoras.",
           "Esta web es otra cosa. Es mi proyecto personal: un hogar para el trabajo que es mío y un reflejo más fiel de lo que hago cuando la historia es propia."
@@ -154,9 +171,18 @@
         "photoAlt": "Retrato de Julen De La Serna delante de una pared amarilla"
       },
       "services": [
-        { "title": "Ready", "text": "Todo empieza con una buena historia. Narrativa con mucha experiencia detrás." },
-        { "title": "Set", "text": "Motion graphics, animación 2D-3D y composición. Flujos de trabajo en After Effects, DaVinci Resolve, Final Cut Pro y Cinema 4D." },
-        { "title": "Action", "text": "Equipo de rodaje propio y conocimiento de las últimas marcas del sector: RED, Blackmagic, Sony, Freefly, DJI." }
+        {
+          "title": "Ready",
+          "text": "Todo empieza con una buena historia. Narrativa con mucha experiencia detrás."
+        },
+        {
+          "title": "Set",
+          "text": "Motion graphics, animación 2D-3D y composición. Flujos de trabajo en After Effects, DaVinci Resolve, Final Cut Pro y Cinema 4D."
+        },
+        {
+          "title": "Action",
+          "text": "Equipo de rodaje propio y conocimiento de las últimas marcas del sector: RED, Blackmagic, Sony, Freefly, DJI."
+        }
       ],
       "seo": {
         "region": "País Vasco",
@@ -166,15 +192,34 @@
           "es": ""
         },
         "faq": [
-          { "q": "¿Dónde estás?", "a": "Estoy en Vitoria-Gasteiz, en el País Vasco, y trabajo por toda la región: Álava, Bizkaia y Gipuzkoa." },
-          { "q": "¿Qué haces?", "a": "Dirijo y ruedo como director de fotografía: videoclips, documentales, piezas de storytelling y contenido de vídeo para marcas." },
-          { "q": "¿Tienes tu propio equipo?", "a": "Sí. Ruedo con mi propio equipo y trabajo con cámaras y herramientas de RED, Blackmagic, Sony, Freefly y DJI." },
-          { "q": "¿Trabajas fuera del País Vasco?", "a": "Mi base es Vitoria-Gasteiz, pero si tu proyecto está en otro sitio, escríbeme y vemos cómo hacerlo posible." },
-          { "q": "¿Cómo puedo contratarte o empezar un proyecto?", "a": "Cuéntame tu idea desde la página de contacto. Te responderé lo antes posible." }
+          {
+            "q": "¿Dónde estás?",
+            "a": "Estoy en Vitoria-Gasteiz, en el País Vasco, y trabajo por toda la región: Álava, Bizkaia y Gipuzkoa."
+          },
+          {
+            "q": "¿Qué haces?",
+            "a": "Dirijo y ruedo como director de fotografía: videoclips, documentales, piezas de storytelling y contenido de vídeo para marcas."
+          },
+          {
+            "q": "¿Tienes tu propio equipo?",
+            "a": "Sí. Ruedo con mi propio equipo y trabajo con cámaras y herramientas de RED, Blackmagic, Sony, Freefly y DJI."
+          },
+          {
+            "q": "¿Trabajas fuera del País Vasco?",
+            "a": "Mi base es Vitoria-Gasteiz, pero si tu proyecto está en otro sitio, escríbeme y vemos cómo hacerlo posible."
+          },
+          {
+            "q": "¿Cómo puedo contratarte o empezar un proyecto?",
+            "a": "Cuéntame tu idea desde la página de contacto. Te responderé lo antes posible."
+          }
         ]
       }
     },
-    "groups": { "videoclip": "Videoclip", "documental": "Documental", "otros": "Otros" },
+    "groups": {
+      "videoclip": "Videoclip",
+      "documental": "Documental",
+      "otros": "Otros"
+    },
     "category": {
       "Music video": "Videoclip",
       "Documentary": "Documental",
@@ -187,7 +232,9 @@
     },
     "projects": {
       "gaupasa": {
-        "intro": ["Gaupasa lleva el concepto del álbum al vídeo: cada canción tiene su propia película. Nueve canciones, nueve películas."]
+        "intro": [
+          "Gaupasa lleva el concepto del álbum al vídeo: cada canción tiene su propia película. Nueve canciones, nueve películas."
+        ]
       }
     }
   },
@@ -258,11 +305,10 @@
     "site": {
       "title": "Filmmaker Vitoria-Gasteizen, Euskadin · Julen De La Serna",
       "description": "Julen De La Serna filmmaker eta fotografia zuzendaria da, Vitoria-Gasteizen. Bideoklipak, dokumentalak eta marka-edukiak Euskadi osoan.",
-      "tagline": "Kontatzeko istorioak.",
       "role": "Filmmaker eta fotografia zuzendaria",
       "roleShort": "filmmaker eta DOP",
       "about": {
-        "lead": "Nire pasioa esperientziak transmititzen dituen edukia sortzea da. Kontatzeko istorioak.",
+        "lead": "Nire pasioa esperientziak transmititzen dituen edukia sortzea da. Stories to be told.",
         "body": [
           "10 urte daramatzat industrian, beti agentzia eta ekoizpen etxeetan.",
           "Webgune hau beste zerbait da. Nire proiektu pertsonala da: nire lanentzako etxea, eta istorioa nirea denean egiten dudanaren isla zuzenagoa."
@@ -270,9 +316,18 @@
         "photoAlt": "Julen De La Serna horma hori baten aurrean, erretratua"
       },
       "services": [
-        { "title": "Ready", "text": "Dena istorio on batekin hasten da. Esperientzia handiko narrazioa." },
-        { "title": "Set", "text": "Motion graphics, 2D-3D animazioa eta konposizioa. After Effects, DaVinci Resolve, Final Cut Pro eta Cinema 4D-n lan egiten dut." },
-        { "title": "Action", "text": "Grabazio-ekipo propioa eta sektoreko azken markei buruzko ezagutza: RED, Blackmagic, Sony, Freefly, DJI." }
+        {
+          "title": "Ready",
+          "text": "Dena istorio on batekin hasten da. Esperientzia handiko narrazioa."
+        },
+        {
+          "title": "Set",
+          "text": "Motion graphics, 2D-3D animazioa eta konposizioa. After Effects, DaVinci Resolve, Final Cut Pro eta Cinema 4D-n lan egiten dut."
+        },
+        {
+          "title": "Action",
+          "text": "Grabazio-ekipo propioa eta sektoreko azken markei buruzko ezagutza: RED, Blackmagic, Sony, Freefly, DJI."
+        }
       ],
       "seo": {
         "region": "Euskadi",
@@ -282,15 +337,34 @@
           "es": ""
         },
         "faq": [
-          { "q": "Non zaude?", "a": "Vitoria-Gasteizen bizi naiz, Euskadin, eta eskualde osoan egiten dut lan: Araban, Bizkaian eta Gipuzkoan." },
-          { "q": "Zer egiten duzu?", "a": "Fotografia zuzendari gisa zuzendu eta grabatzen dut: bideoklipak, dokumentalak, storytelling piezak eta markentzako bideo-edukiak." },
-          { "q": "Ekipo propioa duzu?", "a": "Bai. Neure ekipoarekin grabatzen dut eta RED, Blackmagic, Sony, Freefly eta DJI-ren kamera eta tresnekin egiten dut lan." },
-          { "q": "Euskadiz kanpo lan egiten duzu?", "a": "Vitoria-Gasteizen dut oinarria, baina zure proiektua beste nonbaiten badago, idatzi iezadazu eta ikusiko dugu nola egin." },
-          { "q": "Nola kontrata zaitzaket edo proiektu bat hasi?", "a": "Kontatu zure ideia harremanetarako orrian. Ahal bezain laster erantzungo dizut." }
+          {
+            "q": "Non zaude?",
+            "a": "Vitoria-Gasteizen bizi naiz, Euskadin, eta eskualde osoan egiten dut lan: Araban, Bizkaian eta Gipuzkoan."
+          },
+          {
+            "q": "Zer egiten duzu?",
+            "a": "Fotografia zuzendari gisa zuzendu eta grabatzen dut: bideoklipak, dokumentalak, storytelling piezak eta markentzako bideo-edukiak."
+          },
+          {
+            "q": "Ekipo propioa duzu?",
+            "a": "Bai. Neure ekipoarekin grabatzen dut eta RED, Blackmagic, Sony, Freefly eta DJI-ren kamera eta tresnekin egiten dut lan."
+          },
+          {
+            "q": "Euskadiz kanpo lan egiten duzu?",
+            "a": "Vitoria-Gasteizen dut oinarria, baina zure proiektua beste nonbaiten badago, idatzi iezadazu eta ikusiko dugu nola egin."
+          },
+          {
+            "q": "Nola kontrata zaitzaket edo proiektu bat hasi?",
+            "a": "Kontatu zure ideia harremanetarako orrian. Ahal bezain laster erantzungo dizut."
+          }
         ]
       }
     },
-    "groups": { "videoclip": "Bideoklipa", "documental": "Dokumentala", "otros": "Besteak" },
+    "groups": {
+      "videoclip": "Bideoklipa",
+      "documental": "Dokumentala",
+      "otros": "Besteak"
+    },
     "category": {
       "Music video": "Bideoklipa",
       "Documentary": "Dokumentala",
@@ -303,7 +377,9 @@
     },
     "projects": {
       "gaupasa": {
-        "intro": ["Gaupasak albumaren kontzeptua bideora eramaten du: abesti bakoitzak bere filma du. Bederatzi abesti, bederatzi film."]
+        "intro": [
+          "Gaupasak albumaren kontzeptua bideora eramaten du: abesti bakoitzak bere filma du. Bederatzi abesti, bederatzi film."
+        ]
       }
     }
   }

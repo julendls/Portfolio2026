@@ -193,7 +193,7 @@
 
   /* ---------- textos de cada trabajo: aparecen poco a poco al hacer scroll (móvil) ---------- */
   const captions = $$('.tile .caption');
-  const touchLayout = matchMedia('(hover: none), (max-width: 680px)');
+  const touchLayout = matchMedia('(hover: none), (pointer: coarse), (max-width: 680px)');
   let revealOn = false;
   let revealRaf = 0;
   const clamp01 = (n) => Math.min(1, Math.max(0, n));
@@ -214,7 +214,7 @@
     if (revealOn && !revealRaf) revealRaf = requestAnimationFrame(paintReveal);
   };
   const syncReveal = () => {
-    const want = !reduceMotion && touchLayout.matches && captions.length > 0;
+    const want = touchLayout.matches && captions.length > 0; // solo cambia la opacidad, también con movimiento reducido
     if (want === revealOn) return;
     revealOn = want;
     root.classList.toggle('js-reveal', want);

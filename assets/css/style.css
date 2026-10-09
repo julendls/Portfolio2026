@@ -816,3 +816,11 @@ html[data-view="list"] .cursor.is-on .cursor-label {
   transform: translateY(calc((1 - var(--q, 0)) * 10px));
   transition: opacity 0.2s linear, transform 0.2s linear;
 }
+
+@media (prefers-reduced-motion: reduce) {
+  .js-reveal .tile h3,
+  .js-reveal .tile .artist,
+  .js-reveal .tile .cat {
+    transform: none;
+  }
+}

@@ -2,6 +2,7 @@
 // Genera el sitio estático a partir de data/site.json y data/projects.json.
 // Sin dependencias: node tools/build.mjs
 import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'node:fs';
+import { createHash } from 'node:crypto';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -9,6 +10,10 @@ const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const readJson = (p) => JSON.parse(readFileSync(join(root, p), 'utf8'));
 const site = readJson('data/site.json');
 const catalog = readJson('data/projects.json');
+
+// Versión por contenido: el navegador descarga el CSS/JS nuevo en cuanto cambian.
+const hashOf = (rel) => createHash('md5').update(readFileSync(join(root, rel))).digest('hex').slice(0, 8);
+const V = { css: hashOf('assets/css/style.css'), js: hashOf('assets/js/main.js') };
 
 const groups = catalog.groups;
 const projects = catalog.projects.filter((p) => p.published);
@@ -84,7 +89,7 @@ function shell({ depth, path, title, description, image, body, bodyClass = '', c
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="${base}assets/img/brand/favicon.png">
 <link rel="preload" href="${base}assets/fonts/instrument-serif-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="${base}assets/css/style.css">
+<link rel="stylesheet" href="${base}assets/css/style.css?v=${V.css}">
 ${jsonld ? `<script type="application/ld+json">${jsonld}</script>` : ''}
 </head>
 <body id="top" class="${bodyClass}">
@@ -111,7 +116,7 @@ ${visibleSocials.map((s) => `    <li><a href="${esc(s.url)}" target="_blank" rel
   <p class="legal">© ${year} ${esc(site.name)}</p>
   <a class="to-top" href="#top">Back to top</a>
 </footer>
-<script src="${base}assets/js/main.js" defer></script>
+<script src="${base}assets/js/main.js?v=${V.js}" defer></script>
 </body>
 </html>
 `;

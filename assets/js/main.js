@@ -288,6 +288,20 @@
       cap.style.setProperty('--p', p.toFixed(3));
       cap.style.setProperty('--q', clamp01((p - 0.3) / 0.7).toFixed(3));
     });
+
+    // El bloque más cercano al centro se ve entero; los de arriba y abajo se oscurecen.
+    const mid = vh / 2;
+    const rows = [];
+    tiles.forEach((tile) => {
+      if (tile.hidden) return;
+      const r = tile.getBoundingClientRect();
+      rows.push([tile, Math.abs(r.top + r.height / 2 - mid)]);
+    });
+    const nearest = rows.reduce((m, [, d]) => Math.min(m, d), Infinity);
+    rows.forEach(([tile, d]) => {
+      const k = clamp01((d - nearest - vh * 0.04) / (vh * 0.34));
+      tile.style.setProperty('--d', (1 - k * 0.78).toFixed(3));
+    });
   };
   const queueReveal = () => {
     if (revealOn && !revealRaf) revealRaf = requestAnimationFrame(paintReveal);
@@ -303,6 +317,7 @@
         cap.style.removeProperty('--p');
         cap.style.removeProperty('--q');
       });
+    if (!want) tiles.forEach((tile) => tile.style.removeProperty('--d'));
   };
   window.addEventListener('scroll', queueReveal, { passive: true });
   window.addEventListener('resize', () => {

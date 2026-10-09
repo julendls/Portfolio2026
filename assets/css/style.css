@@ -1128,3 +1128,8 @@ html[data-view="list"] .cursor.is-on .cursor-label {
     transition: opacity 0.24s ease;
   }
 }
+
+/* Móvil: los bloques que quedan arriba y abajo del que miras se oscurecen */
+.js-reveal .tile > a {
+  opacity: var(--d, 1);
+}

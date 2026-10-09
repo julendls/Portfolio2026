@@ -26,8 +26,7 @@
       "platform": "youtube",
       "videoId": "",
       "image": "assets/img/projects/gaupasa.jpg",
-      "published": false,
-      "note": "Faltan los 9 videoId de YouTube (rellenar en collection.videos). Con todos puestos, published a true.",
+      "published": true,
       "collection": {
         "intro": [
           "Gaupasa takes the concept of the album and turns it into video: every song has its own film. Nine songs, nine films."
@@ -36,47 +35,56 @@
           {
             "title": "Gaupasa",
             "feat": "",
-            "videoId": "gOczo0H-VLU"
+            "videoId": "gOczo0H-VLU",
+            "slug": "gaupasa"
           },
           {
             "title": "Metxa",
             "feat": "Akaleia",
-            "videoId": "3JA0rf4-A-0"
+            "videoId": "3JA0rf4-A-0",
+            "slug": "metxa"
           },
           {
             "title": "Dibino",
             "feat": "JazzWoman",
-            "videoId": "9G1eJDHHcAg"
+            "videoId": "9G1eJDHHcAg",
+            "slug": "dibino"
           },
           {
             "title": "Benga",
             "feat": "Manuva",
-            "videoId": ""
+            "videoId": "pTm_H2WuCv4",
+            "slug": "benga"
           },
           {
             "title": "Zerua",
             "feat": "Sara Roy",
-            "videoId": "wnnaN9BOw60"
+            "videoId": "wnnaN9BOw60",
+            "slug": "zerua"
           },
           {
             "title": "Dónde",
             "feat": "Iris",
-            "videoId": ""
+            "videoId": "rcQrppwRZBA",
+            "slug": "donde"
           },
           {
             "title": "Goizerarte",
             "feat": "Albina Stardust",
-            "videoId": ""
+            "videoId": "cv1R5TygYI8",
+            "slug": "goizerarte"
           },
           {
             "title": "Amaitezin",
             "feat": "Esti Markez",
-            "videoId": "BX06-gpnS2U"
+            "videoId": "BX06-gpnS2U",
+            "slug": "amaitezin"
           },
           {
             "title": "Goazen",
             "feat": "Maluks",
-            "videoId": "QeNv4voZMzM"
+            "videoId": "QeNv4voZMzM",
+            "slug": "goazen"
           }
         ]
       }

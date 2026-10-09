@@ -27,12 +27,58 @@
       "videoId": "",
       "image": "assets/img/projects/gaupasa.jpg",
       "published": false,
-      "note": "Pendiente de los 9 enlaces de YouTube (y el título de cada canción). Al rellenar collection.videos, pasa published a true.",
+      "note": "Faltan los 9 videoId de YouTube (rellenar en collection.videos). Con todos puestos, published a true.",
       "collection": {
         "intro": [
           "Gaupasa takes the concept of the album and turns it into video: every song has its own film. Nine songs, nine films."
         ],
-        "videos": []
+        "videos": [
+          {
+            "title": "Gaupasa",
+            "feat": "",
+            "videoId": ""
+          },
+          {
+            "title": "Metxa",
+            "feat": "Akaleia",
+            "videoId": ""
+          },
+          {
+            "title": "Dibino",
+            "feat": "JazzWoman",
+            "videoId": ""
+          },
+          {
+            "title": "Benga",
+            "feat": "Manuva",
+            "videoId": ""
+          },
+          {
+            "title": "Zerua",
+            "feat": "Sara Roy",
+            "videoId": ""
+          },
+          {
+            "title": "Dónde",
+            "feat": "Iris",
+            "videoId": ""
+          },
+          {
+            "title": "Goizerarte",
+            "feat": "Albina Stardust",
+            "videoId": ""
+          },
+          {
+            "title": "Amaitezin",
+            "feat": "Esti Markez",
+            "videoId": ""
+          },
+          {
+            "title": "Goazen",
+            "feat": "Maluks",
+            "videoId": ""
+          }
+        ]
       }
     },
     {

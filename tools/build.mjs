@@ -294,11 +294,6 @@ function homePage() {
 ${projects.map(tile).join('\n')}
     </ul>
   </section>
-
-  <section class="local" aria-labelledby="local-title">
-    <h2 id="local-title">${esc(seo.homeIntro.heading)}</h2>
-    <p>${esc(seo.homeIntro.text)}</p>
-${seo.homeIntro.es ? `    <p lang="es">${esc(seo.homeIntro.es)}</p>\n` : ''}  </section>
 </main>`;
   const list = {
     '@type': 'CollectionPage',

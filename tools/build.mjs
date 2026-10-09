@@ -288,8 +288,8 @@ ${visibleClients
 // ---------- contacto ----------
 function contactPage() {
   const body = `<main id="main" class="contact">
-  <h1>Tell me about your project.</h1>
-  <p class="contact-sub">Write to me and I will reply as soon as I can.</p>
+  <h1>What are we making?</h1>
+  <p class="contact-sub">Write to me and I\'ll reply as soon as I can.</p>
   <div class="contact-grid">
     <form id="contact-form" novalidate data-endpoint="${esc(site.contactEndpoint)}" data-email="${esc(site.email)}">
       <label for="name">Name</label>
@@ -312,7 +312,7 @@ function contactPage() {
     depth: 1,
     path: 'contact/',
     title: `Contact · ${site.name}`,
-    description: `Tell me about your project. ${site.name}, ${site.role.toLowerCase()} based in ${site.location}.`,
+    description: `Get in touch with ${site.name}, ${site.role.toLowerCase()} based in ${site.location}.`,
     body,
     bodyClass: 'page-contact',
     cta: false,

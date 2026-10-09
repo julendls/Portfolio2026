@@ -79,11 +79,48 @@ const b64 = (t) => Buffer.from(t, 'utf8').toString('base64');
 const mailLink = (cls) =>
   `<a class="${cls}" data-m="${b64(site.email)}" href="#">${esc(site.email.replace('@', ' [at] ').replace(/\.(?=[^.]*$)/, ' [dot] '))}</a>`;
 
-function shell({ depth, path, title, description, image, body, bodyClass = '', current = '', jsonld = '', abs = false, cta = true }) {
+// ---------- SEO: datos estructurados ----------
+const personId = `${site.url}/#julen`;
+const seo = site.seo || {};
+const personNode = () => ({
+  '@type': ['Person', 'ProfessionalService'],
+  '@id': personId,
+  name: site.name,
+  jobTitle: site.role,
+  description: site.description,
+  url: site.url,
+  image: `${site.url}/${site.about.photo}`,
+  address: { '@type': 'PostalAddress', addressLocality: site.location, addressRegion: seo.region, addressCountry: 'ES' },
+  ...(seo.geo ? { geo: { '@type': 'GeoCoordinates', latitude: seo.geo[0], longitude: seo.geo[1] } } : {}),
+  areaServed: (seo.areaServed || []).map((n) => ({ '@type': 'Place', name: n })),
+  knowsAbout: seo.serviceTypes || [],
+  makesOffer: (seo.serviceTypes || []).map((n) => ({ '@type': 'Offer', itemOffered: { '@type': 'Service', name: n, areaServed: seo.region } })),
+  sameAs: visibleSocials.map((s) => s.url),
+});
+const siteNode = () => ({ '@type': 'WebSite', '@id': `${site.url}/#website`, url: site.url, name: site.name, inLanguage: site.lang, publisher: { '@id': personId } });
+const crumbs = (items) => ({
+  '@type': 'BreadcrumbList',
+  itemListElement: items.map(([name, path], i) => ({ '@type': 'ListItem', position: i + 1, name, item: `${site.url}/${path}` })),
+});
+const workNode = (p, text) => ({
+  '@type': 'CreativeWork',
+  '@id': `${site.url}/work/${p.slug}/#work`,
+  name: p.title,
+  url: `${site.url}/work/${p.slug}/`,
+  image: `${site.url}/${p.image}`,
+  genre: p.category || undefined,
+  description: text || undefined,
+  creator: { '@id': personId },
+  ...(p.artist ? { about: p.artist } : {}),
+  ...(p.url && !p.collection ? { sameAs: p.url } : {}),
+});
+const graph = (...nodes) => JSON.stringify({ '@context': 'https://schema.org', '@graph': nodes });
+
+function shell({ depth, path, title, description, image, body, bodyClass = '', current = '', jsonld = '', abs = false, cta = true, imageAlt = '', noindex = false }) {
   const base = abs ? '/' : '../'.repeat(depth);
   const home = abs ? '/' : base || './';
   const canonical = `${site.url}/${path}`;
-  const ogImage = `${site.url}/${image || site.about.photo}`;
+  const ogImage = `${site.url}/${image || 'assets/img/brand/og.jpg'}`;
   const nav = [
     { id: 'work', label: 'Work', href: `${home === './' ? '' : home}#work` },
     { id: 'about', label: 'About', href: `${base}about/` },
@@ -96,6 +133,7 @@ function shell({ depth, path, title, description, image, body, bodyClass = '', c
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${esc(title)}</title>
 <meta name="description" content="${esc(description)}">
+<meta name="robots" content="${noindex ? 'noindex' : 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1'}">
 <meta name="theme-color" content="#050505">
 <link rel="canonical" href="${esc(canonical)}">
 <meta property="og:type" content="website">
@@ -104,7 +142,17 @@ function shell({ depth, path, title, description, image, body, bodyClass = '', c
 <meta property="og:description" content="${esc(description)}">
 <meta property="og:url" content="${esc(canonical)}">
 <meta property="og:image" content="${esc(ogImage)}">
+<meta property="og:locale" content="en_US">
+<meta property="og:image:width" content="${image ? 800 : 1200}">
+<meta property="og:image:height" content="${image ? 600 : 630}">
+<meta property="og:image:alt" content="${esc(imageAlt || site.name + ', filmmaker in ' + site.location)}">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="${esc(title)}">
+<meta name="twitter:description" content="${esc(description)}">
+<meta name="twitter:image" content="${esc(ogImage)}">
+<meta name="author" content="${esc(site.name)}">
+<meta name="geo.region" content="${esc(seo.regionCode || 'ES-PV')}">
+<meta name="geo.placename" content="${esc(site.location)}">
 <link rel="icon" href="${base}assets/img/brand/favicon.png">
 <link rel="preload" href="${base}assets/fonts/instrument-serif-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="${base}assets/css/style.css?v=${V.css}">
@@ -190,15 +238,23 @@ ${groups
 ${projects.map(tile).join('\n')}
     </ul>
   </section>
+
+  <section class="local" aria-labelledby="local-title">
+    <h2 id="local-title">${esc(seo.homeIntro.heading)}</h2>
+    <p>${esc(seo.homeIntro.text)}</p>
+    <p lang="es">${esc(seo.homeIntro.es)}</p>
+  </section>
 </main>`;
-  const person = {
-    '@context': 'https://schema.org',
-    '@type': 'Person',
-    name: site.name,
-    jobTitle: site.role,
+  const list = {
+    '@type': 'CollectionPage',
+    '@id': `${site.url}/#work`,
     url: site.url,
-    address: { '@type': 'PostalAddress', addressLocality: site.location, addressCountry: 'ES' },
-    sameAs: visibleSocials.map((s) => s.url),
+    name: site.title,
+    about: { '@id': personId },
+    mainEntity: {
+      '@type': 'ItemList',
+      itemListElement: projects.map((p, n) => ({ '@type': 'ListItem', position: n + 1, url: `${site.url}/work/${p.slug}/`, name: p.title })),
+    },
   };
   return shell({
     depth: 0,
@@ -208,7 +264,7 @@ ${projects.map(tile).join('\n')}
     body,
     bodyClass: 'page-home',
     current: 'work',
-    jsonld: JSON.stringify(person),
+    jsonld: graph(personNode(), siteNode(), list),
   });
 }
 
@@ -269,8 +325,10 @@ ${videos.map(subTile).join('\n')}
     depth: 2,
     path: `work/${p.slug}/`,
     title: `${p.title}, ${p.artist} · ${site.name}`,
-    description: p.collection.intro[0],
+    description: `${p.collection.intro[0]} Visual album by ${p.artist}, filmed by ${site.name} in the Basque Country.`,
     image: p.image,
+    imageAlt: `${p.title}, ${p.artist}`,
+    jsonld: graph(personNode(), siteNode(), crumbs([['Work', ''], [p.title, `work/${p.slug}/`]]), workNode(p, p.collection.intro[0])),
     body,
     bodyClass: 'page-project',
     current: 'work',
@@ -317,9 +375,11 @@ ${facts.map(([k, v]) => `    <div><dt>${esc(k)}</dt><dd>${esc(v)}</dd></div>`).j
   return shell({
     depth: 2,
     path: `work/${p.slug}/`,
-    title: `${who} · ${site.name}`,
-    description: `${p.category || 'Project'}${p.artist ? ` with ${p.artist}` : ''}. ${p.role ? p.role + '. ' : ''}Work by ${site.name}.`,
+    title: `${who} · ${p.category || 'Project'} by ${site.name}`,
+    description: `${p.title}${p.artist ? `, ${p.artist}` : ''}: ${(p.category || 'project').toLowerCase()}${p.role ? ` (${p.role.toLowerCase()})` : ''} by ${site.name}, filmmaker in ${site.location}, ${seo.region}.`,
     image: p.image,
+    imageAlt: `Still from ${p.title}${p.artist ? `, ${p.artist}` : ''}`,
+    jsonld: graph(personNode(), siteNode(), crumbs([['Work', ''], [p.title, `work/${p.slug}/`]]), workNode(p, '')),
     body,
     bodyClass: 'page-project',
     current: 'work',
@@ -343,6 +403,12 @@ ${a.body.map((t) => `      <p>${esc(t)}</p>`).join('\n')}
 ${site.services.map((s) => `      <article><h3>${esc(s.title)}</h3><p>${esc(s.text)}</p></article>`).join('\n')}
     </div>
   </section>
+  <section class="faq" aria-labelledby="faq-title">
+    <h2 id="faq-title">Good to know</h2>
+    <dl>
+${(seo.faq || []).map((f) => `      <div><dt>${esc(f.q)}</dt><dd>${esc(f.a)}</dd></div>`).join('\n')}
+    </dl>
+  </section>
   <section class="clients" aria-labelledby="clients-title">
     <h2 id="clients-title">Companies I have worked with</h2>
     <ul>
@@ -358,9 +424,19 @@ ${visibleClients
   return shell({
     depth: 1,
     path: 'about/',
-    title: `About · ${site.name}`,
-    description: `${a.lead} ${site.name}, ${site.role.toLowerCase()} based in ${site.location}.`,
+    title: `About Julen De La Serna, filmmaker in ${site.location}`,
+    description: `${site.name}, ${site.role.toLowerCase()} based in ${site.location}, ${seo.region}. ${a.body[0]}`,
     image: a.photo,
+    imageAlt: a.photoAlt,
+    jsonld: graph(
+      personNode(),
+      siteNode(),
+      crumbs([['About', 'about/']]),
+      {
+        '@type': 'FAQPage',
+        mainEntity: (seo.faq || []).map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
+      }
+    ),
     body,
     bodyClass: 'page-about',
     current: 'about',
@@ -393,7 +469,8 @@ function contactPage() {
   return shell({
     depth: 1,
     path: 'contact/',
-    title: `Contact · ${site.name}`,
+    title: `Contact ${site.name}, filmmaker in ${site.location}`,
+    jsonld: graph(personNode(), siteNode(), crumbs([['Contact', 'contact/']])),
     description: `Get in touch with ${site.name}, ${site.role.toLowerCase()} based in ${site.location}.`,
     body,
     bodyClass: 'page-contact',
@@ -416,6 +493,7 @@ function notFoundPage() {
     description: 'This page does not exist.',
     body,
     bodyClass: 'page-404',
+    noindex: true,
     cta: false,
   });
 }
@@ -431,10 +509,27 @@ const urls = ['', 'about/', 'contact/', ...projects.map((p) => `work/${p.slug}/`
 write(
   'sitemap.xml',
   `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls
-    .map((u) => `  <url><loc>${site.url}/${u}</loc></url>`)
+    .map((u) => `  <url><loc>${site.url}/${u}</loc><lastmod>${new Date().toISOString().slice(0, 10)}</lastmod></url>`)
     .join('\n')}\n</urlset>\n`
 );
 write('robots.txt', `User-agent: *\nAllow: /\nSitemap: ${site.url}/sitemap.xml\n`);
+write(
+  'llms.txt',
+  `# ${site.name}
+
+> ${site.description}
+
+${seo.homeIntro.text} Based in ${site.location}, ${seo.region}.
+
+## Pages
+- [Work](${site.url}/): selected music videos, documentaries and other pieces
+- [About](${site.url}/about/): who he is, how he works, equipment and clients
+- [Contact](${site.url}/contact/): start a project
+
+## Projects
+${projects.map((p) => `- [${p.title}${p.artist ? ' · ' + p.artist : ''}](${site.url}/work/${p.slug}/)${p.category ? ': ' + p.category : ''}`).join('\n')}
+`
+);
 write('.nojekyll', '');
 
 const loops = projects.filter(hasLoop).length;

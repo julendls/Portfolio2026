@@ -2,8 +2,8 @@
   "name": "Julen De La Serna",
   "url": "https://julendls.com",
   "lang": "en",
-  "title": "Julen De La Serna · Filmmaker and cinematographer in the Basque Country",
-  "description": "Portfolio of Julen De La Serna: music videos, documentaries and other pieces shot and produced from Vitoria-Gasteiz, Basque Country.",
+  "title": "Filmmaker in Vitoria-Gasteiz, Basque Country · Julen De La Serna",
+  "description": "Julen De La Serna is a filmmaker and director of photography in Vitoria-Gasteiz. Music videos, documentaries and branded content across the Basque Country.",
   "tagline": "Stories to be told.",
   "role": "Filmmaker and director of photography",
   "location": "Vitoria-Gasteiz",
@@ -115,5 +115,54 @@
       "show": false
     }
   ],
-  "roleShort": "Filmmaker and DOP"
+  "roleShort": "Filmmaker and DOP",
+  "seo": {
+    "region": "Basque Country",
+    "regionCode": "ES-PV",
+    "geo": [
+      42.8467,
+      -2.6716
+    ],
+    "areaServed": [
+      "Vitoria-Gasteiz",
+      "Álava",
+      "Bizkaia",
+      "Gipuzkoa",
+      "Basque Country"
+    ],
+    "serviceTypes": [
+      "Filmmaking",
+      "Cinematography",
+      "Music video production",
+      "Documentary filmmaking",
+      "Branded video content"
+    ],
+    "homeIntro": {
+      "heading": "Filmmaker in Vitoria-Gasteiz, Basque Country",
+      "text": "I'm Julen De La Serna, a filmmaker and director of photography based in Vitoria-Gasteiz. I direct and shoot music videos, documentaries and branded content for artists, brands and production companies across the Basque Country.",
+      "es": "Filmmaker y director de fotografía en Vitoria-Gasteiz, País Vasco (Euskadi). Videoclips, documentales y contenido de marca."
+    },
+    "faq": [
+      {
+        "q": "Where are you based?",
+        "a": "I'm based in Vitoria-Gasteiz, in the Basque Country, and I work across the region: Álava, Bizkaia and Gipuzkoa."
+      },
+      {
+        "q": "What do you do?",
+        "a": "I direct and shoot as director of photography: music videos, documentaries, storytelling pieces and branded video content."
+      },
+      {
+        "q": "Do you have your own equipment?",
+        "a": "Yes. I shoot with my own gear and work with cameras and tools from RED, Blackmagic, Sony, Freefly and DJI."
+      },
+      {
+        "q": "Can you work outside the Basque Country?",
+        "a": "My base is Vitoria-Gasteiz, but if your project is somewhere else, write to me and we'll see how to make it work."
+      },
+      {
+        "q": "How can I hire you or start a project?",
+        "a": "Tell me about your idea through the contact page. I'll reply as soon as I can."
+      }
+    ]
+  }
 }

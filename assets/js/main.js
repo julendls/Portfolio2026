@@ -23,6 +23,23 @@
     a.textContent = mail;
   });
 
+  /* ---------- selector de idioma: se despliega al pasar el ratón (o al tocar) ---------- */
+  const lang = $('.lang');
+  if (lang) {
+    const current = $('.lang-current', lang);
+    const setOpen = (on) => {
+      lang.classList.toggle('open', on);
+      current.setAttribute('aria-expanded', String(on));
+    };
+    current.addEventListener('click', () => setOpen(!lang.classList.contains('open')));
+    document.addEventListener('click', (e) => {
+      if (!lang.contains(e.target)) setOpen(false);
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') setOpen(false);
+    });
+  }
+
   /* ---------- reloj de la cabecera ---------- */
   const clock = $('.clock time');
   if (clock) {
@@ -299,6 +316,8 @@
   const form = $('#contact-form');
   if (form) {
     const status = $('.form-status', form);
+    const d = form.dataset;
+    const msg = { invalid: d.msgInvalid, sending: d.msgSending, sent: d.msgSent, error: d.msgError, opening: d.msgOpening, subject: d.msgSubject };
     const say = (text, isError) => {
       status.textContent = text;
       status.classList.toggle('is-error', !!isError);
@@ -317,14 +336,14 @@
         if (bad && !firstBad) firstBad = el;
       });
       if (firstBad) {
-        say('Please check the highlighted fields: something is missing or the email is not valid.', true);
+        say(msg.invalid, true);
         firstBad.focus();
         return;
       }
 
       const endpoint = form.dataset.endpoint;
       if (endpoint) {
-        say('Sending…');
+        say(msg.sending);
         try {
           const res = await fetch(endpoint, {
             method: 'POST',
@@ -333,17 +352,17 @@
           });
           if (!res.ok) throw new Error(String(res.status));
           form.reset();
-          say('Message sent. I will reply as soon as I can.');
+          say(msg.sent);
         } catch (_) {
-          say('The message could not be sent. Write to me at ' + decode(form.dataset.m) + '.', true);
+          say(msg.error.replace('{email}', decode(form.dataset.m)), true);
         }
         return;
       }
 
       // Sin servicio de formularios configurado: se abre el correo del visitante.
-      const subject = encodeURIComponent('Message from the website: ' + data.name);
+      const subject = encodeURIComponent(msg.subject + data.name);
       const body = encodeURIComponent(data.message + '\n\n' + data.name + '\n' + data.email);
-      say('Opening your email app…');
+      say(msg.opening);
       location.href = 'mailto:' + decode(form.dataset.m) + '?subject=' + subject + '&body=' + body;
     });
   }

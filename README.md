@@ -50,3 +50,13 @@ Sin configurar, abre el programa de correo del visitante. Para enviar desde la p
 1. Claude programa en una rama y abre un pull request.
 2. Muse revisa el PR y deja sus comentarios en `REVIEW.md` (o como comentarios del PR).
 3. Claude lee `REVIEW.md`, aplica los cambios y marca cada punto como resuelto.
+
+
+## Idiomas (EN / ES / EUS)
+
+- Inglés en la raíz (idioma por defecto, sin redirecciones automáticas), castellano en `/es/` y euskera en `/eu/`.
+- Todos los textos traducidos viven en `data/i18n.json`. Para cambiar una frase, edítala ahí y ejecuta `node tools/build.mjs`.
+- Los títulos de proyectos y artistas no se traducen; sí sus tipos (`category`), roles y grupos (ver `category`, `role` y `groups` en el JSON).
+- Un proyecto con texto propio por idioma (como la intro de Gaupasa) lo declara en `projects.<slug>.intro`.
+- Las etiquetas `hreflang` y el sitemap enlazan las tres versiones para que Google muestre cada idioma a quien corresponde.
+- Conviene que una persona nativa revise el euskera antes de darlo por definitivo.

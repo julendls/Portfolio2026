@@ -329,6 +329,7 @@ html[data-view="list"] .artist:empty {
 }
 
 /* ---------- cursor play y vista previa ---------- */
+
 .cursor,
 .peek {
   position: fixed;
@@ -340,20 +341,23 @@ html[data-view="list"] .artist:empty {
 }
 .cursor-label {
   display: block;
-  padding: 9px 14px 8px;
-  background: #d6d5d1;
-  color: #0a0a0a;
-  font: 600 13px / 1 var(--sans);
-  letter-spacing: 0.08em;
+  color: #fff;
+  font: 500 16px / 1 var(--sans);
+  letter-spacing: 0.04em;
   white-space: nowrap;
-  transform: translate(-50%, -50%) scale(0);
-  transition: transform 0.25s var(--ease);
+  transform: translate(-50%, -50%) scale(0.9);
+  opacity: 0;
+  transition: opacity 0.2s, transform 0.25s var(--ease);
 }
 .cursor.is-on .cursor-label {
+  opacity: 1;
   transform: translate(-50%, -50%) scale(1);
 }
 html[data-view="list"] .cursor.is-on .cursor-label {
-  transform: translate(-50%, -50%) scale(0);
+  opacity: 0;
+}
+.cursor {
+  mix-blend-mode: difference;
 }
 .peek {
   width: 300px;
@@ -457,11 +461,10 @@ html[data-view="list"] .cursor.is-on .cursor-label {
     position: absolute;
     left: 50%;
     top: 50%;
-    padding: 10px 16px 9px;
-    background: #d6d5d1;
-    color: #0a0a0a;
-    font: 600 14px / 1 var(--sans);
-    letter-spacing: 0.08em;
+    color: #fff;
+    font: 500 18px / 1 var(--sans);
+    letter-spacing: 0.04em;
+    text-shadow: 0 1px 14px rgba(0, 0, 0, 0.7);
     transform: translate(-50%, -50%);
   }
 }

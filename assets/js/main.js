@@ -1,0 +1,269 @@
+/* Portfolio Julen De La Serna: sin dependencias. */
+(() => {
+  'use strict';
+
+  const $ = (sel, root = document) => root.querySelector(sel);
+  const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
+  const finePointer = matchMedia('(hover: hover) and (pointer: fine)').matches;
+  const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const root = document.documentElement;
+
+  /* ---------- reloj de la cabecera ---------- */
+  const clock = $('.clock time');
+  if (clock) {
+    const fmt = new Intl.DateTimeFormat('es-ES', {
+      hour: '2-digit',
+      minute: '2-digit',
+      timeZone: clock.dataset.tz || 'Europe/Madrid',
+    });
+    const tick = () => {
+      const now = new Date();
+      clock.textContent = fmt.format(now);
+      clock.dateTime = now.toISOString();
+    };
+    tick();
+    setInterval(tick, 10000);
+  }
+
+  /* ---------- cursor "play" + vista previa de la lista ---------- */
+  let cursorOff = () => {};
+  if (finePointer) {
+    root.classList.add('has-cursor');
+
+    const cursor = document.createElement('div');
+    cursor.className = 'cursor';
+    cursor.setAttribute('aria-hidden', 'true');
+    cursor.innerHTML =
+      '<div class="cursor-disc"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 3.5v17a1 1 0 0 0 1.5.86l14-8.5a1 1 0 0 0 0-1.72l-14-8.5A1 1 0 0 0 6 3.5z"/></svg></div>';
+
+    const peek = document.createElement('div');
+    peek.className = 'peek';
+    peek.setAttribute('aria-hidden', 'true');
+    peek.innerHTML = '<img alt="">';
+    const peekImg = $('img', peek);
+
+    document.body.append(cursor, peek);
+
+    let tx = -200,
+      ty = -200,
+      x = tx,
+      y = ty,
+      raf = 0;
+    const ease = reduceMotion ? 1 : 0.2;
+
+    const frame = () => {
+      x += (tx - x) * ease;
+      y += (ty - y) * ease;
+      const t = `translate3d(${x.toFixed(1)}px, ${y.toFixed(1)}px, 0)`;
+      cursor.style.transform = t;
+      peek.style.transform = t;
+      raf = Math.abs(tx - x) > 0.1 || Math.abs(ty - y) > 0.1 ? requestAnimationFrame(frame) : 0;
+    };
+    const kick = () => {
+      if (!raf) raf = requestAnimationFrame(frame);
+    };
+
+    document.addEventListener(
+      'pointermove',
+      (e) => {
+        if (e.pointerType !== 'mouse') return;
+        tx = e.clientX;
+        ty = e.clientY;
+        kick();
+      },
+      { passive: true }
+    );
+
+    const setOn = (on, tile) => {
+      cursor.classList.toggle('is-on', on);
+      const listing = root.dataset.view === 'list';
+      peek.classList.toggle('is-on', on && listing && !!tile);
+      if (on && listing && tile && tile.dataset.image) {
+        const src = tile.dataset.image;
+        if (!peekImg.src.endsWith(src)) peekImg.src = src;
+      }
+    };
+    cursorOff = () => setOn(false);
+
+    document.addEventListener('pointerover', (e) => {
+      if (e.pointerType !== 'mouse') return;
+      const target = e.target.closest('[data-cursor]');
+      if (target) setOn(true, target.closest('.tile'));
+    });
+    document.addEventListener('pointerout', (e) => {
+      if (e.pointerType !== 'mouse') return;
+      const from = e.target.closest('[data-cursor]');
+      const to = e.relatedTarget && e.relatedTarget.closest ? e.relatedTarget.closest('[data-cursor]') : null;
+      if (from && from !== to) setOn(false);
+    });
+    window.addEventListener('blur', cursorOff);
+    document.addEventListener('mouseleave', cursorOff);
+  }
+
+  /* ---------- vídeos en bucle dentro de las miniaturas ---------- */
+  const tiles = $$('.tile');
+  tiles.forEach((tile) => {
+    const video = $('video', tile);
+    if (!video) return;
+
+    const start = () => {
+      if (reduceMotion) return;
+      if (!video.getAttribute('src')) {
+        video.src = video.dataset.src;
+        video.load();
+      }
+      const p = video.play();
+      if (p && p.catch) p.catch(() => {});
+    };
+    const stop = () => {
+      video.pause();
+      tile.classList.remove('is-playing');
+      try {
+        video.currentTime = 0;
+      } catch (_) {}
+    };
+
+    video.addEventListener('playing', () => tile.classList.add('is-playing'));
+    tile.addEventListener('pointerenter', (e) => e.pointerType === 'mouse' && start());
+    tile.addEventListener('pointerleave', (e) => e.pointerType === 'mouse' && stop());
+    tile.addEventListener('focusin', start);
+    tile.addEventListener('focusout', stop);
+
+    // En pantallas táctiles no hay hover: se reproduce lo que está a la vista.
+    if (!finePointer && !reduceMotion && 'IntersectionObserver' in window) {
+      new IntersectionObserver(
+        (entries) =>
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) start();
+            else stop();
+          }),
+        { threshold: 0.6 }
+      ).observe(tile);
+    }
+  });
+
+  /* ---------- filtros y vista (cuadrícula / lista) ---------- */
+  const grid = $('.grid');
+  if (grid) {
+    const count = $('.count');
+    const filterBtns = $$('[data-filter]');
+    const viewBtns = $$('[data-view-btn]');
+    const params = new URLSearchParams(location.search);
+
+    const sync = () => {
+      const qs = params.toString();
+      history.replaceState(null, '', location.pathname + (qs ? '?' + qs : '') + location.hash);
+    };
+
+    const applyFilter = (value) => {
+      let shown = 0;
+      tiles.forEach((tile) => {
+        const ok = value === 'all' || tile.dataset.group === value;
+        tile.hidden = !ok;
+        if (ok) shown += 1;
+      });
+      if (count) count.textContent = String(shown);
+      filterBtns.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.filter === value)));
+      if (value === 'all') params.delete('tipo');
+      else params.set('tipo', value);
+    };
+
+    const applyView = (value) => {
+      root.dataset.view = value;
+      viewBtns.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.viewBtn === value)));
+      if (value === 'grid') params.delete('vista');
+      else params.set('vista', 'lista');
+      cursorOff();
+    };
+
+    filterBtns.forEach((b) =>
+      b.addEventListener('click', () => {
+        applyFilter(b.dataset.filter);
+        sync();
+      })
+    );
+    viewBtns.forEach((b) =>
+      b.addEventListener('click', () => {
+        applyView(b.dataset.viewBtn);
+        sync();
+      })
+    );
+
+    const wanted = params.get('tipo');
+    if (wanted && filterBtns.some((b) => b.dataset.filter === wanted)) applyFilter(wanted);
+    applyView(params.get('vista') === 'lista' ? 'list' : 'grid');
+  }
+
+  /* ---------- reproductor de la ficha de proyecto ---------- */
+  $$('[data-embed]').forEach((box) => {
+    const btn = $('.player-btn', box);
+    if (!btn) return;
+    btn.addEventListener(
+      'click',
+      () => {
+        const frame = document.createElement('iframe');
+        frame.src = box.dataset.embed;
+        frame.title = box.dataset.title || 'Vídeo';
+        frame.allow = 'autoplay; fullscreen; picture-in-picture; encrypted-media';
+        frame.allowFullscreen = true;
+        box.replaceChildren(frame);
+        box.removeAttribute('data-cursor');
+        cursorOff();
+      },
+      { once: true }
+    );
+  });
+
+  /* ---------- formulario de contacto ---------- */
+  const form = $('#contact-form');
+  if (form) {
+    const status = $('.form-status', form);
+    const say = (text, isError) => {
+      status.textContent = text;
+      status.classList.toggle('is-error', !!isError);
+    };
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const data = Object.fromEntries(new FormData(form).entries());
+      const fields = ['name', 'email', 'message'];
+      let firstBad = null;
+      fields.forEach((f) => {
+        const el = form.elements[f];
+        const value = String(data[f] || '').trim();
+        const bad = !value || (f === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value));
+        el.setAttribute('aria-invalid', String(bad));
+        if (bad && !firstBad) firstBad = el;
+      });
+      if (firstBad) {
+        say('Revisa los campos marcados: faltan datos o el email no es válido.', true);
+        firstBad.focus();
+        return;
+      }
+
+      const endpoint = form.dataset.endpoint;
+      if (endpoint) {
+        say('Enviando…');
+        try {
+          const res = await fetch(endpoint, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+            body: JSON.stringify(data),
+          });
+          if (!res.ok) throw new Error(String(res.status));
+          form.reset();
+          say('Mensaje enviado. Te respondo en cuanto pueda.');
+        } catch (_) {
+          say('No se ha podido enviar. Escríbeme a ' + form.dataset.email + '.', true);
+        }
+        return;
+      }
+
+      // Sin servicio de formularios configurado: se abre el correo del visitante.
+      const subject = encodeURIComponent('Contacto desde la web: ' + data.name);
+      const body = encodeURIComponent(data.message + '\n\n' + data.name + '\n' + data.email);
+      say('Abriendo tu programa de correo…');
+      location.href = 'mailto:' + form.dataset.email + '?subject=' + subject + '&body=' + body;
+    });
+  }
+})();

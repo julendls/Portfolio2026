@@ -1,0 +1,52 @@
+{
+  "name": "Julen De La Serna",
+  "url": "https://julendls.com",
+  "lang": "es",
+  "title": "Julen De La Serna · Filmmaker y director de fotografía en el País Vasco",
+  "description": "Portfolio de Julen De La Serna: videoclips, documentales y piezas audiovisuales rodadas y producidas desde Vitoria-Gasteiz.",
+  "tagline": "Historias para ser contadas.",
+  "role": "Filmmaker y director de fotografía",
+  "location": "Vitoria-Gasteiz",
+  "timezone": "Europe/Madrid",
+  "email": "julendelaserna@gmail.com",
+  "contactEndpoint": "",
+  "socials": [
+    { "id": "instagram", "label": "Instagram", "url": "https://instagram.com/julendls", "show": true },
+    { "id": "vimeo", "label": "Vimeo", "url": "https://vimeo.com/julendls", "show": true },
+    { "id": "youtube", "label": "YouTube", "url": "https://youtube.com/julendls", "show": true },
+    { "id": "linkedin", "label": "LinkedIn", "url": "https://www.linkedin.com/pub/julen-de-la-serna/86/40a/118", "show": true },
+    { "id": "facebook", "label": "Facebook", "url": "https://fb.com/julendelaserna", "show": false },
+    { "id": "twitter", "label": "X", "url": "https://twitter.com/julendls", "show": false }
+  ],
+  "about": {
+    "lead": "Mi pasión es crear contenidos audiovisuales capaces de transmitir experiencias. Historias para ser contadas.",
+    "body": [
+      "Para mí, cada nuevo proyecto es una oportunidad de crear algo diferente. Esta página es un reflejo de mi pasión y de mi experiencia, de los proyectos personales que he podido llevar a cabo durante estos últimos años, gracias a los cuales he podido evolucionar y aportar mi granito de arena a un mundo audiovisual que no para de cambiar."
+    ],
+    "photo": "assets/img/brand/julen.jpg",
+    "photoAlt": "Julen De La Serna rodando con una cámara de cine al hombro"
+  },
+  "services": [
+    {
+      "title": "Preparados",
+      "text": "Todo comienza con una buena historia. Storytelling con amplia experiencia en la creación de experiencias audiovisuales."
+    },
+    {
+      "title": "Listos",
+      "text": "Motion graphics, animación 2D-3D, composición. Flujos de trabajo con After Effects, DaVinci Resolve, Final Cut Pro y Cinema 4D."
+    },
+    {
+      "title": "Acción",
+      "text": "Conocimientos y equipo propio de grabación con las últimas marcas del mundo audiovisual: RED, Blackmagic, Sony, Freefly, DJI."
+    }
+  ],
+  "clients": [
+    { "name": "Aktual Films", "logo": "assets/img/clients/aktual.png", "url": "https://arteman.eus", "show": true },
+    { "name": "Kubik", "logo": "assets/img/clients/kubik.png", "url": "https://kubikvitoria.com", "show": true },
+    { "name": "Debolex", "logo": "assets/img/clients/debolex.png", "url": "https://debolex.com", "show": true },
+    { "name": "Atresmedia", "logo": "assets/img/clients/atresmedia.png", "url": "https://atresmedia.com", "show": true },
+    { "name": "Plano a Plano", "logo": "assets/img/clients/planoapla.png", "url": "https://planoaplano.es", "show": true },
+    { "name": "Haizeacam", "logo": "assets/img/clients/haizeacam.png", "url": "https://haizeacam.com", "show": true },
+    { "name": "Dissolve", "logo": "assets/img/clients/dissolve.png", "url": "", "show": false }
+  ]
+}

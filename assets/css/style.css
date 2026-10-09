@@ -683,6 +683,11 @@ html[data-view="list"] .cursor.is-on .cursor-label {
   padding: clamp(40px, 6vw, 88px) var(--pad) 28px;
   border-top: 1px solid var(--line);
 }
+.footer-lead {
+  grid-column: 1 / -1;
+  color: var(--muted);
+  font-size: 17px;
+}
 .footer-cta {
   grid-column: 1 / -1;
   font: 400 clamp(44px, 9vw, 150px) / 0.95 var(--serif);

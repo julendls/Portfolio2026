@@ -56,7 +56,7 @@ const write = (rel, content) => {
 };
 
 // ---------- plantilla común ----------
-function shell({ depth, path, title, description, image, body, bodyClass = '', current = '', jsonld = '', abs = false }) {
+function shell({ depth, path, title, description, image, body, bodyClass = '', current = '', jsonld = '', abs = false, cta = true }) {
   const base = abs ? '/' : '../'.repeat(depth);
   const home = abs ? '/' : base || './';
   const canonical = `${site.url}/${path}`;
@@ -102,8 +102,9 @@ ${nav
 </header>
 ${body}
 <footer class="site-footer">
-  <a class="footer-cta" href="${base}contact/">Tell me about your project</a>
-  <a class="footer-mail" href="mailto:${esc(site.email)}">${esc(site.email)}</a>
+${cta ? `  <p class="footer-lead">Like what you see?</p>
+  <a class="footer-cta" href="${base}contact/">Got a story? Let's tell it.</a>
+` : ''}  <a class="footer-mail" href="mailto:${esc(site.email)}">${esc(site.email)}</a>
   <ul class="socials">
 ${visibleSocials.map((s) => `    <li><a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.label)}</a></li>`).join('\n')}
   </ul>
@@ -246,7 +247,6 @@ function aboutPage() {
     <img class="portrait" src="../${esc(a.photo)}" width="1690" height="1100" alt="${esc(a.photoAlt)}">
     <div class="about-text">
 ${a.body.map((t) => `      <p>${esc(t)}</p>`).join('\n')}
-      <p><a class="text-link" href="../contact/">Let's talk about your project</a></p>
     </div>
   </div>
   <section class="services" aria-labelledby="services-title">
@@ -309,6 +309,7 @@ function contactPage() {
     description: `Tell me about your project. ${site.name}, ${site.role.toLowerCase()} based in ${site.location}.`,
     body,
     bodyClass: 'page-contact',
+    cta: false,
     current: 'contact',
   });
 }
@@ -327,6 +328,7 @@ function notFoundPage() {
     description: 'This page does not exist.',
     body,
     bodyClass: 'page-404',
+    cta: false,
   });
 }
 

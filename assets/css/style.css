@@ -885,3 +885,13 @@ html[data-view="list"] .cursor.is-on .cursor-label {
     animation: none;
   }
 }
+
+/* ---------- página de colección (Gaupasa) ---------- */
+.collection-intro {
+  display: grid;
+  gap: 16px;
+  max-width: 34em;
+  margin-bottom: clamp(40px, 6vw, 88px);
+  font: 400 clamp(20px, 2vw, 28px) / 1.35 var(--serif);
+  letter-spacing: -0.005em;
+}

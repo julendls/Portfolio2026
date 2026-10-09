@@ -25,7 +25,13 @@ for (const p of projects) {
   if (!p.slug || !p.title) problems.push(`Proyecto sin slug o título: ${JSON.stringify(p).slice(0, 80)}`);
   if (seen.has(p.slug)) problems.push(`Slug repetido: ${p.slug}`);
   seen.add(p.slug);
-  if (!p.url) problems.push(`${p.slug}: falta url (o ponlo con "published": false)`);
+  if (p.collection) {
+    const vids = p.collection.videos || [];
+    if (!vids.length) problems.push(`${p.slug}: la colección no tiene vídeos (o ponlo con "published": false)`);
+    vids.forEach((v, i) => {
+      if (!v.title || !v.videoId) problems.push(`${p.slug}: el vídeo ${i + 1} necesita title y videoId`);
+    });
+  } else if (!p.url) problems.push(`${p.slug}: falta url (o ponlo con "published": false)`);
   if (!existsSync(join(root, p.image))) problems.push(`${p.slug}: no existe la imagen ${p.image}`);
   if (!groups.some((g) => g.id === p.group)) problems.push(`${p.slug}: grupo desconocido "${p.group}"`);
 }
@@ -50,6 +56,13 @@ const PLATFORMS = {
 };
 
 const hasLoop = (p) => existsSync(join(root, 'assets/loops', `${p.slug}.mp4`));
+const slugify = (t) =>
+  String(t)
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
 const year = new Date().getFullYear();
 const visibleSocials = site.socials.filter((s) => s.show);
 const visibleClients = site.clients.filter((c) => c.show);
@@ -196,7 +209,72 @@ ${projects.map(tile).join('\n')}
 }
 
 // ---------- proyecto ----------
+// ---------- colección (proyecto con varios vídeos, p. ej. Gaupasa) ----------
+function collectionPage(p, i) {
+  const prev = projects[(i - 1 + projects.length) % projects.length];
+  const next = projects[(i + 1) % projects.length];
+  const videos = p.collection.videos;
+  const subTile = (v, n) => {
+    const vslug = v.slug || slugify(v.title);
+    const loopRel = `assets/loops/${p.slug}/${vslug}.mp4`;
+    const loop = existsSync(join(root, loopRel));
+    const thumb = v.image ? `../../${v.image}` : `https://i.ytimg.com/vi/${v.videoId}/maxresdefault.jpg`;
+    const fallback = `https://i.ytimg.com/vi/${v.videoId}/hqdefault.jpg`;
+    const onerror = v.image ? '' : ` onerror="this.onerror=null;this.src='${fallback}'"`;
+    return `      <li class="tile">
+        <a href="https://www.youtube.com/watch?v=${esc(v.videoId)}" target="_blank" rel="noopener" data-cursor>
+          <div class="frame">
+            <img src="${esc(thumb)}" width="1280" height="720" alt=""${n < 2 ? '' : ' loading="lazy"'} decoding="async"${onerror}>${
+      loop ? `\n            <video muted loop playsinline preload="none" tabindex="-1" aria-hidden="true" data-src="../../${esc(loopRel)}"></video>` : ''
+    }
+          </div>
+          <div class="caption">
+            <div class="cap-main">
+              <h3>${esc(v.title)}</h3>
+              <p class="artist"></p>
+            </div>
+            <p class="cat">YouTube</p>
+          </div>
+        </a>
+      </li>`;
+  };
+  const facts = [
+    p.artist && ['Artist', p.artist],
+    p.category && ['Type', p.category],
+    p.role && ['Role', p.role],
+    ['Watch on', 'YouTube'],
+  ].filter(Boolean);
+  const body = `<main id="main" class="project collection">
+  <a class="back" href="../../#work">Back to work</a>
+  <h1>${esc(p.title)}</h1>
+  <dl class="facts">
+${facts.map(([k, v]) => `    <div><dt>${esc(k)}</dt><dd>${esc(v)}</dd></div>`).join('\n')}
+  </dl>
+  <div class="collection-intro">
+${p.collection.intro.map((t) => `    <p>${esc(t)}</p>`).join('\n')}
+  </div>
+  <ul class="grid">
+${videos.map(subTile).join('\n')}
+  </ul>
+  <nav class="pager" aria-label="More projects">
+    <a class="prev" href="../${esc(prev.slug)}/"><span>Previous</span><strong>${esc(prev.title)}</strong></a>
+    <a class="next" href="../${esc(next.slug)}/"><span>Next</span><strong>${esc(next.title)}</strong></a>
+  </nav>
+</main>`;
+  return shell({
+    depth: 2,
+    path: `work/${p.slug}/`,
+    title: `${p.title}, ${p.artist} · ${site.name}`,
+    description: p.collection.intro[0],
+    image: p.image,
+    body,
+    bodyClass: 'page-project',
+    current: 'work',
+  });
+}
+
 function projectPage(p, i) {
+  if (p.collection) return collectionPage(p, i);
   const prev = projects[(i - 1 + projects.length) % projects.length];
   const next = projects[(i + 1) % projects.length];
   const plat = PLATFORMS[p.platform] || { label: 'Web', embed: null };

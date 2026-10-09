@@ -1,5 +1,5 @@
 {
-  "_comment": "Catálogo de proyectos. Para añadir uno: copia una entrada, cambia el slug, pon su imagen en assets/img/projects/<slug>.jpg y (opcional) un bucle de vídeo en assets/loops/<slug>.mp4. Luego ejecuta: node tools/build.mjs",
+  "_comment": "Catálogo de proyectos. Para añadir uno: copia una entrada, cambia el slug, pon su imagen en assets/img/projects/<slug>.jpg y (opcional) un bucle de vídeo en assets/loops/<slug>.mp4. Luego ejecuta: node tools/build.mjs Proyectos con 'collection' (como Gaupasa) abren una página con varios vídeos: cada uno lleva title, videoId y, opcional, slug e image.",
   "groups": [
     {
       "id": "videoclip",
@@ -15,6 +15,26 @@
     }
   ],
   "projects": [
+    {
+      "slug": "gaupasa",
+      "title": "Gaupasa",
+      "artist": "Kai Nakai",
+      "category": "Visual album",
+      "group": "videoclip",
+      "role": "",
+      "url": "https://www.youtube.com/@kainakai/videos",
+      "platform": "youtube",
+      "videoId": "",
+      "image": "assets/img/projects/gaupasa.jpg",
+      "published": false,
+      "note": "Pendiente de los 9 enlaces de YouTube (y el título de cada canción). Al rellenar collection.videos, pasa published a true.",
+      "collection": {
+        "intro": [
+          "Gaupasa takes the concept of the album and turns it into video: every song has its own film. Nine songs, nine films."
+        ],
+        "videos": []
+      }
+    },
     {
       "slug": "bedridden-hellbound",
       "title": "Bedridden & Hellbound",

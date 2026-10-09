@@ -143,7 +143,7 @@
 
   /* ---------- filtros y vista (cuadrícula / lista) ---------- */
   const grid = $('.grid');
-  if (grid) {
+  if (grid && $('.work-bar')) {
     const filterBtns = $$('[data-filter]');
     const viewBtns = $$('[data-view-btn]');
     const params = new URLSearchParams(location.search);

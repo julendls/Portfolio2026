@@ -825,9 +825,10 @@ html[data-view="list"] .cursor.is-on .cursor-label {
   }
 }
 
-/* ---------- entrada en cascada de la portada (unos 3,7 s) ----------
+/* ---------- entrada en cascada de la portada (unos 3 s) ----------
    Solo CSS: sin JavaScript todo se ve de inmediato al terminar. Se repite
-   una vez por sesión; con ?intro en la dirección se fuerza. */
+   una vez por sesión; con ?intro en la dirección se fuerza.
+   Orden: header, titular + subtexto a la vez, y por último Work con las miniaturas. */
 @keyframes intro-fade {
   from {
     opacity: 0;
@@ -836,10 +837,10 @@ html[data-view="list"] .cursor.is-on .cursor-label {
     opacity: 1;
   }
 }
-@keyframes intro-rise {
+@keyframes intro-soft {
   from {
     opacity: 0;
-    transform: translateY(14px);
+    transform: translateY(8px);
   }
   to {
     opacity: 1;
@@ -847,28 +848,26 @@ html[data-view="list"] .cursor.is-on .cursor-label {
   }
 }
 .page-home .site-header {
-  animation: intro-fade 0.9s ease-out both;
+  animation: intro-fade 0.9s ease-in-out both;
 }
-.page-home .hero h1 {
-  animation: intro-rise 1.2s var(--ease) 0.8s both;
-}
+.page-home .hero h1,
 .page-home .hero-note {
-  animation: intro-rise 1s var(--ease) 1.5s both;
+  animation: intro-soft 1.5s ease-in-out 0.55s both;
 }
 .page-home .work-bar {
-  animation: intro-rise 1s var(--ease) 2.1s both;
+  animation: intro-soft 1.3s ease-in-out 1.4s both;
 }
 .page-home .tile:nth-child(1) {
-  animation: intro-rise 1s var(--ease) 2.6s both;
+  animation: intro-soft 1.3s ease-in-out 1.55s both;
 }
 .page-home .tile:nth-child(2) {
-  animation: intro-rise 1s var(--ease) 2.75s both;
+  animation: intro-soft 1.3s ease-in-out 1.67s both;
 }
 .page-home .tile:nth-child(3) {
-  animation: intro-rise 1s var(--ease) 2.9s both;
+  animation: intro-soft 1.3s ease-in-out 1.79s both;
 }
 .page-home .tile:nth-child(4) {
-  animation: intro-rise 1s var(--ease) 3.05s both;
+  animation: intro-soft 1.3s ease-in-out 1.91s both;
 }
 .no-intro .page-home .site-header,
 .no-intro .page-home .hero h1,

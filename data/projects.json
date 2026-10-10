@@ -142,19 +142,6 @@
       "published": true
     },
     {
-      "slug": "tu-aprobacion",
-      "title": "Tu aprobación",
-      "artist": "Skakeitan ft. Aspencat",
-      "category": "Music video",
-      "group": "videoclip",
-      "role": "Self-produced",
-      "url": "https://www.youtube.com/watch?v=yWiU1j75bVI",
-      "platform": "youtube",
-      "videoId": "yWiU1j75bVI",
-      "image": "assets/img/projects/tu-aprobacion.jpg",
-      "published": true
-    },
-    {
       "slug": "galdu-ez-baduzu",
       "title": "Galdu ez baduzu",
       "artist": "STR",
@@ -165,6 +152,19 @@
       "platform": "youtube",
       "videoId": "kpu0cOFI3ak",
       "image": "assets/img/projects/galdu-ez-baduzu.jpg",
+      "published": true
+    },
+    {
+      "slug": "tu-aprobacion",
+      "title": "Tu aprobación",
+      "artist": "Skakeitan ft. Aspencat",
+      "category": "Music video",
+      "group": "videoclip",
+      "role": "Self-produced",
+      "url": "https://www.youtube.com/watch?v=yWiU1j75bVI",
+      "platform": "youtube",
+      "videoId": "yWiU1j75bVI",
+      "image": "assets/img/projects/tu-aprobacion.jpg",
       "published": true
     },
     {

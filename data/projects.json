@@ -142,19 +142,6 @@
       "published": true
     },
     {
-      "slug": "angela",
-      "title": "Angela",
-      "artist": "",
-      "category": "Fashion model video",
-      "group": "otros",
-      "role": "Self-produced",
-      "url": "https://www.youtube.com/watch?v=xK-AF7SoDNE",
-      "platform": "youtube",
-      "videoId": "xK-AF7SoDNE",
-      "image": "assets/img/projects/angela.jpg",
-      "published": true
-    },
-    {
       "slug": "tu-aprobacion",
       "title": "Tu aprobación",
       "artist": "Skakeitan ft. Aspencat",
@@ -165,6 +152,19 @@
       "platform": "youtube",
       "videoId": "yWiU1j75bVI",
       "image": "assets/img/projects/tu-aprobacion.jpg",
+      "published": true
+    },
+    {
+      "slug": "angela",
+      "title": "Angela",
+      "artist": "",
+      "category": "Fashion model video",
+      "group": "otros",
+      "role": "Self-produced",
+      "url": "https://www.youtube.com/watch?v=xK-AF7SoDNE",
+      "platform": "youtube",
+      "videoId": "xK-AF7SoDNE",
+      "image": "assets/img/projects/angela.jpg",
       "published": true
     },
     {

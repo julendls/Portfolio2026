@@ -1,0 +1,386 @@
+{
+  "_comment": "Textos de la web por idioma. 'en' es el idioma por defecto (raíz del sitio); 'es' vive en /es/ y 'eu' en /eu/. 'site' sobrescribe campos de site.json; 'category', 'role' y 'groups' traducen los valores de projects.json; 'projects' trae textos propios por slug. Las traducciones al euskera conviene que las revise una persona nativa. 'Stories to be told.' se mantiene siempre en inglés (es el copy de marca): por eso no hay 'tagline' en es/eu.",
+  "langs": [
+    {
+      "code": "en",
+      "prefix": "",
+      "label": "EN",
+      "name": "English",
+      "locale": "en_US"
+    },
+    {
+      "code": "es",
+      "prefix": "es/",
+      "label": "ES",
+      "name": "Castellano",
+      "locale": "es_ES"
+    },
+    {
+      "code": "eu",
+      "prefix": "eu/",
+      "label": "EUS",
+      "name": "Euskara",
+      "locale": "eu_ES"
+    }
+  ],
+  "en": {
+    "ui": {
+      "skip": "Skip to content",
+      "navAria": "Main",
+      "work": "Work",
+      "about": "About",
+      "contact": "Contact",
+      "langAria": "Language",
+      "logoAlt": "{name}, filmmaker",
+      "heroNote": "{role} based in <span class=\"nb\">{loc}</span>.",
+      "filterAria": "Filter by type",
+      "all": "All",
+      "viewAria": "View",
+      "grid": "Grid",
+      "list": "List",
+      "back": "Back to work",
+      "moreAria": "More projects",
+      "prev": "Previous",
+      "next": "Next",
+      "artist": "Artist",
+      "with": "With",
+      "type": "Type",
+      "role": "Role",
+      "watchOn": "Watch on",
+      "openOn": "Open on {x}",
+      "watchOnX": "Watch on {x}",
+      "play": "Play {t}",
+      "still": "Still from {t}",
+      "footerLead": "Like what you see?",
+      "footerCta": "Got a story? Let's tell it.",
+      "toTop": "Back to top",
+      "servicesTitle": "How I work",
+      "clientsTitle": "Companies I have worked with",
+      "faqTitle": "Good to know",
+      "contactH1": "What are we making?",
+      "contactSub": "Write to me and I'll reply as soon as I can.",
+      "name": "Name",
+      "email": "Email",
+      "message": "Message",
+      "send": "Send message",
+      "contactSide": "You can also write to me directly at",
+      "place": "{loc}, Basque Country",
+      "msgInvalid": "Please check the highlighted fields: something is missing or the email is not valid.",
+      "msgSending": "Sending…",
+      "msgSent": "Message sent. I will reply as soon as I can.",
+      "msgError": "The message could not be sent. Write to me at {email}.",
+      "msgOpening": "Opening your email app…",
+      "msgSubject": "Message from the website: ",
+      "notFoundH1": "This page does not exist.",
+      "notFoundTitle": "Page not found",
+      "notFoundDesc": "This page does not exist.",
+      "projTitle": "{who} · {cat} by {name}",
+      "projDesc": "{who}: {cat}{roleP} by {name}, filmmaker in {loc}, {region}.",
+      "collTitle": "{who} · {name}",
+      "collDesc": "{intro} Visual album by {artist}, filmed by {name} in the Basque Country.",
+      "aboutTitle": "About Julen De La Serna, filmmaker in Vitoria-Gasteiz",
+      "aboutDesc": "{name}, {role} based in {loc}, {region}. {b0}",
+      "contactTitle": "Contact Julen De La Serna, filmmaker in Vitoria-Gasteiz",
+      "contactDesc": "Get in touch with {name}, {role} based in {loc}.",
+      "stillAlt": "Still from {t}",
+      "ogAlt": "{name}, filmmaker in {loc}",
+      "workLink": "Work",
+      "projectsWord": "Project"
+    },
+    "site": {},
+    "groups": {},
+    "category": {},
+    "role": {},
+    "projects": {}
+  },
+  "es": {
+    "ui": {
+      "skip": "Saltar al contenido",
+      "navAria": "Principal",
+      "work": "Trabajos",
+      "about": "Sobre mí",
+      "contact": "Contacto",
+      "langAria": "Idioma",
+      "logoAlt": "{name}, filmmaker",
+      "heroNote": "{role} en <span class=\"nb\">{loc}</span>.",
+      "filterAria": "Filtrar por tipo",
+      "all": "Todos",
+      "viewAria": "Vista",
+      "grid": "Cuadrícula",
+      "list": "Lista",
+      "back": "Volver a trabajos",
+      "moreAria": "Más proyectos",
+      "prev": "Anterior",
+      "next": "Siguiente",
+      "artist": "Artista",
+      "with": "Con",
+      "type": "Tipo",
+      "role": "Rol",
+      "watchOn": "Ver en",
+      "openOn": "Abrir en {x}",
+      "watchOnX": "Ver en {x}",
+      "play": "Reproducir {t}",
+      "still": "Fotograma de {t}",
+      "footerLead": "¿Te gusta lo que ves?",
+      "footerCta": "¿Tienes una historia? Contémosla.",
+      "toTop": "Volver arriba",
+      "servicesTitle": "Cómo trabajo",
+      "clientsTitle": "Empresas con las que he trabajado",
+      "faqTitle": "Conviene saber",
+      "contactH1": "¿Qué vamos a crear?",
+      "contactSub": "Escríbeme y te responderé lo antes posible.",
+      "name": "Nombre",
+      "email": "Correo electrónico",
+      "message": "Mensaje",
+      "send": "Enviar mensaje",
+      "contactSide": "También puedes escribirme directamente a",
+      "place": "{loc}, País Vasco",
+      "msgInvalid": "Revisa los campos marcados: falta algo o el correo no es válido.",
+      "msgSending": "Enviando…",
+      "msgSent": "Mensaje enviado. Te responderé lo antes posible.",
+      "msgError": "No se pudo enviar el mensaje. Escríbeme a {email}.",
+      "msgOpening": "Abriendo tu aplicación de correo…",
+      "msgSubject": "Mensaje desde la web: ",
+      "notFoundH1": "Esta página no existe.",
+      "notFoundTitle": "Página no encontrada",
+      "notFoundDesc": "Esta página no existe.",
+      "projTitle": "{who} · {cat} de {name}",
+      "projDesc": "{who}: {cat}{roleP}, de {name}, filmmaker en {loc}, {region}.",
+      "collTitle": "{who} · {name}",
+      "collDesc": "{intro} Álbum visual de {artist}, rodado por {name} en el País Vasco.",
+      "aboutTitle": "Sobre Julen De La Serna, filmmaker en Vitoria-Gasteiz",
+      "aboutDesc": "{name}, {role} en {loc}, {region}. {b0}",
+      "contactTitle": "Contacto con Julen De La Serna, filmmaker en Vitoria-Gasteiz",
+      "contactDesc": "Ponte en contacto con {name}, {role} en {loc}.",
+      "stillAlt": "Fotograma de {t}",
+      "ogAlt": "{name}, filmmaker en {loc}",
+      "workLink": "Trabajos",
+      "projectsWord": "Proyecto"
+    },
+    "site": {
+      "title": "Filmmaker en Vitoria-Gasteiz, País Vasco · Julen De La Serna",
+      "description": "Julen De La Serna es filmmaker y director de fotografía en Vitoria-Gasteiz. Videoclips, documentales y contenido de marca en todo el País Vasco.",
+      "role": "Filmmaker y director de fotografía",
+      "roleShort": "Filmmaker y DOP",
+      "about": {
+        "lead": "Mi pasión es crear contenido que transmite experiencias. Stories to be told.",
+        "body": [
+          "Llevo 10 años en la industria, siempre dentro de agencias y productoras.",
+          "Esta web es otra cosa. Es mi proyecto personal: un hogar para el trabajo que es mío y un reflejo más fiel de lo que hago cuando la historia es propia."
+        ],
+        "photoAlt": "Retrato de Julen De La Serna delante de una pared amarilla"
+      },
+      "services": [
+        {
+          "title": "Ready",
+          "text": "Todo empieza con una buena historia. Narrativa con mucha experiencia detrás."
+        },
+        {
+          "title": "Set",
+          "text": "Motion graphics, animación 2D-3D y composición. Flujos de trabajo en After Effects, DaVinci Resolve, Final Cut Pro y Cinema 4D."
+        },
+        {
+          "title": "Action",
+          "text": "Equipo de rodaje propio y conocimiento de las últimas marcas del sector: RED, Blackmagic, Sony, Freefly, DJI."
+        }
+      ],
+      "seo": {
+        "region": "País Vasco",
+        "homeIntro": {
+          "heading": "Filmmaker en Vitoria-Gasteiz, País Vasco",
+          "text": "Soy Julen De La Serna, filmmaker y director de fotografía en Vitoria-Gasteiz. Dirijo y ruedo videoclips, documentales y contenido de marca para artistas, marcas y productoras de todo el País Vasco.",
+          "es": ""
+        },
+        "faq": [
+          {
+            "q": "¿Dónde estás?",
+            "a": "Estoy en Vitoria-Gasteiz, en el País Vasco, y trabajo por toda la región: Álava, Bizkaia y Gipuzkoa."
+          },
+          {
+            "q": "¿Qué haces?",
+            "a": "Dirijo y ruedo como director de fotografía: videoclips, documentales, piezas de storytelling y contenido de vídeo para marcas."
+          },
+          {
+            "q": "¿Tienes tu propio equipo?",
+            "a": "Sí. Ruedo con mi propio equipo y trabajo con cámaras y herramientas de RED, Blackmagic, Sony, Freefly y DJI."
+          },
+          {
+            "q": "¿Trabajas fuera del País Vasco?",
+            "a": "Mi base es Vitoria-Gasteiz, pero si tu proyecto está en otro sitio, escríbeme y vemos cómo hacerlo posible."
+          },
+          {
+            "q": "¿Cómo puedo contratarte o empezar un proyecto?",
+            "a": "Cuéntame tu idea desde la página de contacto. Te responderé lo antes posible."
+          }
+        ]
+      }
+    },
+    "groups": {
+      "videoclip": "Videoclip",
+      "documental": "Documental",
+      "otros": "Otros"
+    },
+    "category": {
+      "Music video": "Videoclip",
+      "Documentary": "Documental",
+      "Visual album": "Álbum visual",
+      "Fashion model video": "Vídeo de moda"
+    },
+    "role": {
+      "Self-produced": "Autoproducido",
+      "Director of photography": "Director de fotografía"
+    },
+    "projects": {
+      "gaupasa": {
+        "intro": [
+          "Gaupasa lleva el concepto del álbum al vídeo: cada canción tiene su propia película. Nueve canciones, nueve películas."
+        ]
+      }
+    }
+  },
+  "eu": {
+    "ui": {
+      "skip": "Joan edukira",
+      "navAria": "Nagusia",
+      "work": "Lanak",
+      "about": "Niri buruz",
+      "contact": "Kontaktua",
+      "langAria": "Hizkuntza",
+      "logoAlt": "{name}, filmmaker",
+      "heroNote": "<span class=\"nb\">{loc}ko</span> {role}a.",
+      "filterAria": "Iragazi motaren arabera",
+      "all": "Denak",
+      "viewAria": "Ikuspegia",
+      "grid": "Sareta",
+      "list": "Zerrenda",
+      "back": "Itzuli lanetara",
+      "moreAria": "Proiektu gehiago",
+      "prev": "Aurrekoa",
+      "next": "Hurrengoa",
+      "artist": "Artista",
+      "with": "Norekin",
+      "type": "Mota",
+      "role": "Zeregina",
+      "watchOn": "Ikusi hemen",
+      "openOn": "Ireki hemen: {x}",
+      "watchOnX": "Ikusi hemen: {x}",
+      "play": "Erreproduzitu {t}",
+      "still": "{t}-ren fotograma",
+      "footerLead": "Gustatzen zaizu ikusten duzuna?",
+      "footerCta": "Istorioren bat duzu? Kontatu dezagun.",
+      "toTop": "Itzuli gora",
+      "servicesTitle": "Nola egiten dut lan",
+      "clientsTitle": "Lan egin dudan enpresak",
+      "faqTitle": "Jakitekoak",
+      "contactH1": "Zer sortuko dugu?",
+      "contactSub": "Idatzi iezadazu eta ahal bezain laster erantzungo dizut.",
+      "name": "Izena",
+      "email": "Posta elektronikoa",
+      "message": "Mezua",
+      "send": "Bidali mezua",
+      "contactSide": "Zuzenean ere idatz diezadakezu hemen:",
+      "place": "{loc}, Euskadi",
+      "msgInvalid": "Begiratu markatutako eremuak: zerbait falta da edo posta elektronikoa ez da baliozkoa.",
+      "msgSending": "Bidaltzen…",
+      "msgSent": "Mezua bidali da. Ahal bezain laster erantzungo dizut.",
+      "msgError": "Ezin izan da mezua bidali. Idatzi iezadazu hemen: {email}.",
+      "msgOpening": "Zure posta aplikazioa irekitzen…",
+      "msgSubject": "Webgunetik mezua: ",
+      "notFoundH1": "Orri hau ez da existitzen.",
+      "notFoundTitle": "Ez da orria aurkitu",
+      "notFoundDesc": "Orri hau ez da existitzen.",
+      "projTitle": "{who} · {cat} · {name}",
+      "projDesc": "{who}: {cat}{roleP}. {name} filmmakerraren lana, {loc}, {region}.",
+      "collTitle": "{who} · {name}",
+      "collDesc": "{intro} {artist}-en album bisuala, {name}-k Euskadin grabatua.",
+      "aboutTitle": "Julen De La Serna buruz · filmmaker Vitoria-Gasteizen",
+      "aboutDesc": "{name}, {loc}en bizi den {role}. {b0}",
+      "contactTitle": "Kontaktua · Julen De La Serna, filmmaker Vitoria-Gasteizen",
+      "contactDesc": "Jarri harremanetan {name}-(r)ekin, {loc}en bizi den filmmaker eta fotografia zuzendariarekin.",
+      "stillAlt": "{t}-ren fotograma",
+      "ogAlt": "{name}, filmmaker {loc}en",
+      "workLink": "Lanak",
+      "projectsWord": "Proiektua"
+    },
+    "site": {
+      "title": "Filmmaker Vitoria-Gasteizen, Euskadin · Julen De La Serna",
+      "description": "Julen De La Serna filmmaker eta fotografia zuzendaria da, Vitoria-Gasteizen. Bideoklipak, dokumentalak eta marka-edukiak Euskadi osoan.",
+      "role": "Filmmaker eta fotografia zuzendaria",
+      "roleShort": "filmmaker eta DOP",
+      "about": {
+        "lead": "Nire pasioa esperientziak transmititzen dituen edukia sortzea da. Stories to be told.",
+        "body": [
+          "10 urte daramatzat industrian, beti agentzia eta ekoizpen etxeetan.",
+          "Webgune hau beste zerbait da. Nire proiektu pertsonala da: nire lanentzako etxea, eta istorioa nirea denean egiten dudanaren isla zuzenagoa."
+        ],
+        "photoAlt": "Julen De La Serna horma hori baten aurrean, erretratua"
+      },
+      "services": [
+        {
+          "title": "Ready",
+          "text": "Dena istorio on batekin hasten da. Esperientzia handiko narrazioa."
+        },
+        {
+          "title": "Set",
+          "text": "Motion graphics, 2D-3D animazioa eta konposizioa. After Effects, DaVinci Resolve, Final Cut Pro eta Cinema 4D-n lan egiten dut."
+        },
+        {
+          "title": "Action",
+          "text": "Grabazio-ekipo propioa eta sektoreko azken markei buruzko ezagutza: RED, Blackmagic, Sony, Freefly, DJI."
+        }
+      ],
+      "seo": {
+        "region": "Euskadi",
+        "homeIntro": {
+          "heading": "Filmmaker Vitoria-Gasteizen, Euskadin",
+          "text": "Julen De La Serna naiz, Vitoria-Gasteizen bizi den filmmaker eta fotografia zuzendaria. Bideoklipak, dokumentalak eta marka-edukiak zuzentzen eta grabatzen ditut artista, marka eta ekoizpen etxeentzat, Euskadi osoan.",
+          "es": ""
+        },
+        "faq": [
+          {
+            "q": "Non zaude?",
+            "a": "Vitoria-Gasteizen bizi naiz, Euskadin, eta eskualde osoan egiten dut lan: Araban, Bizkaian eta Gipuzkoan."
+          },
+          {
+            "q": "Zer egiten duzu?",
+            "a": "Fotografia zuzendari gisa zuzendu eta grabatzen dut: bideoklipak, dokumentalak, storytelling piezak eta markentzako bideo-edukiak."
+          },
+          {
+            "q": "Ekipo propioa duzu?",
+            "a": "Bai. Neure ekipoarekin grabatzen dut eta RED, Blackmagic, Sony, Freefly eta DJI-ren kamera eta tresnekin egiten dut lan."
+          },
+          {
+            "q": "Euskadiz kanpo lan egiten duzu?",
+            "a": "Vitoria-Gasteizen dut oinarria, baina zure proiektua beste nonbaiten badago, idatzi iezadazu eta ikusiko dugu nola egin."
+          },
+          {
+            "q": "Nola kontrata zaitzaket edo proiektu bat hasi?",
+            "a": "Kontatu zure ideia harremanetarako orrian. Ahal bezain laster erantzungo dizut."
+          }
+        ]
+      }
+    },
+    "groups": {
+      "videoclip": "Bideoklipa",
+      "documental": "Dokumentala",
+      "otros": "Besteak"
+    },
+    "category": {
+      "Music video": "Bideoklipa",
+      "Documentary": "Dokumentala",
+      "Visual album": "Album bisuala",
+      "Fashion model video": "Moda bideoa"
+    },
+    "role": {
+      "Self-produced": "Autoekoiztua",
+      "Director of photography": "Fotografia zuzendaria"
+    },
+    "projects": {
+      "gaupasa": {
+        "intro": [
+          "Gaupasak albumaren kontzeptua bideora eramaten du: abesti bakoitzak bere filma du. Bederatzi abesti, bederatzi film."
+        ]
+      }
+    }
+  }
+}

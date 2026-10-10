@@ -14,7 +14,7 @@ Rediseño de la web de 2021 con cuadrícula de trabajo, vídeos en bucle dentro 
 | Diseño y comportamiento | `assets/css/style.css`, `assets/js/main.js` |
 | Generador de páginas | `tools/build.mjs` |
 
-Las páginas (`index.html`, `trabajo/*`, `sobre-mi/`, `contacto/`) se generan: no se editan a mano.
+Las páginas (`index.html`, `work/*`, `about/`, `contact/`) se generan: no se editan a mano.
 
 ## Flujo de trabajo
 
@@ -34,7 +34,7 @@ Los proyectos con `"published": false` quedan fuera del sitio (hay dos pendiente
 ### Vídeo en la miniatura
 
 Si existe `assets/loops/<slug>.mp4`, la miniatura lo reproduce al pasar el ratón (y en móvil, al verla en pantalla).
-Sin ese archivo, la miniatura muestra solo la imagen. Para crear uno desde el vídeo completo (necesita ffmpeg):
+Sin ese archivo, la miniatura muestra solo la imagen. Ahora mismo todos los bucles son el mismo vídeo de prueba: sustituye cada `assets/loops/<slug>.mp4` por el bueno (mismo nombre) y listo, no hace falta volver a generar nada. Para crear uno desde el vídeo completo (necesita ffmpeg):
 
 ```bash
 tools/make-loop.sh kolpe ~/Rodajes/kolpe.mov 42 6   # slug, vídeo, segundo de inicio, duración
@@ -50,3 +50,13 @@ Sin configurar, abre el programa de correo del visitante. Para enviar desde la p
 1. Claude programa en una rama y abre un pull request.
 2. Muse revisa el PR y deja sus comentarios en `REVIEW.md` (o como comentarios del PR).
 3. Claude lee `REVIEW.md`, aplica los cambios y marca cada punto como resuelto.
+
+
+## Idiomas (EN / ES / EUS)
+
+- Inglés en la raíz (idioma por defecto, sin redirecciones automáticas), castellano en `/es/` y euskera en `/eu/`.
+- Todos los textos traducidos viven en `data/i18n.json`. Para cambiar una frase, edítala ahí y ejecuta `node tools/build.mjs`.
+- Los títulos de proyectos y artistas no se traducen; sí sus tipos (`category`), roles y grupos (ver `category`, `role` y `groups` en el JSON).
+- Un proyecto con texto propio por idioma (como la intro de Gaupasa) lo declara en `projects.<slug>.intro`.
+- Las etiquetas `hreflang` y el sitemap enlazan las tres versiones para que Google muestre cada idioma a quien corresponde.
+- Conviene que una persona nativa revise el euskera antes de darlo por definitivo.

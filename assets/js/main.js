@@ -215,6 +215,35 @@
       if (!raf) raf = requestAnimationFrame(pick);
     };
     players.forEach((t) => api.set(t, t._loop));
+
+    // El primer vídeo de la portada espera ~3 s desde la carga (mientras dura la cascada del intro):
+    // se precarga ya, pero se ve la imagen estática hasta que arranca. Solo ese, solo la primera vez.
+    const first = players[0];
+    const HOLD_MS = 3000;
+    if (first && $('.hero') && performance.now() < HOLD_MS) {
+      const base = first._loop;
+      let timer = 0;
+      let held = true;
+      const v = $('video', first);
+      api.set(first, {
+        start() {
+          if (!held) return base.start();
+          if (v && !v.getAttribute('src')) {
+            v.src = v.dataset.src;
+            v.load();
+          }
+          clearTimeout(timer);
+          timer = setTimeout(() => {
+            held = false;
+            if (current === first) base.start();
+          }, Math.max(0, HOLD_MS - performance.now()));
+        },
+        stop() {
+          clearTimeout(timer);
+          if (!held) base.stop();
+        },
+      });
+    }
     window.addEventListener('scroll', queue, { passive: true });
     window.addEventListener('resize', queue);
     pick();

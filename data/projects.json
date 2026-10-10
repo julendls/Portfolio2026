@@ -194,16 +194,16 @@
       "published": true
     },
     {
-      "slug": "kepa-acero-haizeacam",
-      "title": "Kepa Acero & Haizeacam",
+      "slug": "gasteiz-calling",
+      "title": "Gasteiz Calling",
       "artist": "",
-      "category": "Storytelling",
+      "category": "Aftermovie",
       "group": "otros",
       "role": "Self-produced",
-      "url": "https://www.youtube.com/watch?v=_LZeOCsc1QE",
+      "url": "https://www.youtube.com/watch?v=xdssdzZmaAI",
       "platform": "youtube",
-      "videoId": "_LZeOCsc1QE",
-      "image": "assets/img/projects/kepa-acero-haizeacam.jpg",
+      "videoId": "xdssdzZmaAI",
+      "image": "assets/img/projects/gasteiz-calling.jpg",
       "published": true
     },
     {
@@ -220,6 +220,19 @@
       "published": true
     },
     {
+      "slug": "kepa-acero-haizeacam",
+      "title": "Kepa Acero & Haizeacam",
+      "artist": "",
+      "category": "Storytelling",
+      "group": "otros",
+      "role": "Self-produced",
+      "url": "https://www.youtube.com/watch?v=_LZeOCsc1QE",
+      "platform": "youtube",
+      "videoId": "_LZeOCsc1QE",
+      "image": "assets/img/projects/kepa-acero-haizeacam.jpg",
+      "published": true
+    },
+    {
       "slug": "cruce-de-caminos",
       "title": "Cruce de Caminos",
       "artist": "Nómadas",
@@ -230,19 +243,6 @@
       "platform": "vimeo",
       "videoId": "185724734",
       "image": "assets/img/projects/cruce-de-caminos.jpg",
-      "published": true
-    },
-    {
-      "slug": "gasteiz-calling",
-      "title": "Gasteiz Calling",
-      "artist": "",
-      "category": "Aftermovie",
-      "group": "otros",
-      "role": "Self-produced",
-      "url": "https://www.youtube.com/watch?v=xdssdzZmaAI",
-      "platform": "youtube",
-      "videoId": "xdssdzZmaAI",
-      "image": "assets/img/projects/gasteiz-calling.jpg",
       "published": true
     },
     {

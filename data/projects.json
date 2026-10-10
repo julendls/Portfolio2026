@@ -129,6 +129,19 @@
       "published": true
     },
     {
+      "slug": "15k",
+      "title": "15K",
+      "artist": "Kai Nakai",
+      "category": "Music video",
+      "group": "videoclip",
+      "role": "Self-produced",
+      "url": "https://www.youtube.com/watch?v=TTpi24sJY8I",
+      "platform": "youtube",
+      "videoId": "TTpi24sJY8I",
+      "image": "assets/img/projects/15k.jpg",
+      "published": true
+    },
+    {
       "slug": "angela",
       "title": "Angela",
       "artist": "",
@@ -217,19 +230,6 @@
       "platform": "vimeo",
       "videoId": "185724734",
       "image": "assets/img/projects/cruce-de-caminos.jpg",
-      "published": true
-    },
-    {
-      "slug": "15k",
-      "title": "15K",
-      "artist": "Kai Nakai",
-      "category": "Music video",
-      "group": "videoclip",
-      "role": "Self-produced",
-      "url": "https://www.youtube.com/watch?v=TTpi24sJY8I",
-      "platform": "youtube",
-      "videoId": "TTpi24sJY8I",
-      "image": "assets/img/projects/15k.jpg",
       "published": true
     },
     {

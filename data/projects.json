@@ -155,6 +155,19 @@
       "published": true
     },
     {
+      "slug": "galdu-ez-baduzu",
+      "title": "Galdu ez baduzu",
+      "artist": "STR",
+      "category": "Music video",
+      "group": "videoclip",
+      "role": "Director of photography",
+      "url": "https://www.youtube.com/watch?v=kpu0cOFI3ak",
+      "platform": "youtube",
+      "videoId": "kpu0cOFI3ak",
+      "image": "assets/img/projects/galdu-ez-baduzu.jpg",
+      "published": true
+    },
+    {
       "slug": "angela",
       "title": "Angela",
       "artist": "",
